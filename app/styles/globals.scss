@@ -1,0 +1,44 @@
+// styles/globals.scss
+@use "./index.scss" as *;
+
+// Réinitialisation des styles par défaut
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+// Styles typographiques
+body {
+  font-family: "inter", sans-serif;
+  line-height: 1.6;
+  color: $color-surface-a40;
+  background-color: $color-surface-a0;
+}
+
+// Styles de mise en page
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.flex {
+  display: flex;
+}
+
+.cta {
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  background-color: $color-primary-a40;
+  transition: background-color 0.2s;
+  border: none;
+  border-radius: 0.25rem;
+
+  &:hover {
+    background-color: $color-primary-a50;
+  }
+}

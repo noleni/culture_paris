@@ -1,0 +1,73 @@
+@use "../styles/index" as *;
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  .search {
+    display: flex;
+    justify-content: center;
+
+    .input {
+      width: 260px;
+      padding: 0.5rem 1rem;
+      border: 1px solid $color-surface-a20;
+      border-top-left-radius: 0.25rem;
+      border-bottom-left-radius: 0.25rem;
+      background-color: $color-surface-a0;
+      color: $color-surface-a40;
+      transition: border-color 0.2s;
+
+      &:focus {
+        border-color: $color-primary-a40;
+      }
+    }
+
+    .button {
+      padding: 0.5rem;
+      border: none;
+      border-top-right-radius: 0.25rem;
+      border-bottom-right-radius: 0.25rem;
+      background-color: $color-primary-a40;
+      color: $color-surface-a0;
+      cursor: pointer;
+      transition: background-color 0.2s;
+
+      svg {
+        width: 18px;
+        height: 18px;
+      }
+
+      &:hover {
+        // background-color: $color-primary-a60;
+      }
+    }
+  }
+
+  .ul {
+    display: flex;
+    gap: 1rem;
+    list-style-type: none;
+
+    .li {
+      cursor: pointer;
+
+      .link {
+        text-decoration: none;
+        color: $color-surface-a40;
+        transition: color 0.2s;
+
+        &.active {
+          font-weight: 600;
+        }
+
+        &:hover {
+          color: $color-primary-a40;
+        }
+      }
+    }
+  }
+}
