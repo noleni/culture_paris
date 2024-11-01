@@ -16,6 +16,10 @@ body {
   background-color: $color-surface-a0;
 }
 
+main {
+  margin: 20px 40px;
+}
+
 // Styles de mise en page
 .container {
   max-width: 1200px;
@@ -41,4 +45,12 @@ body {
   &:hover {
     background-color: $color-primary-a50;
   }
+}
+
+.carroussel {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  padding: 20px;
+  margin-bottom: 20px;
 }

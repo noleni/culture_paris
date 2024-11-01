@@ -8,7 +8,7 @@ import { AiOutlineSearch } from "react-icons/ai";
 
 const Navbar: React.FC = () => {
   const navigation = [
-    { name: "Expos", href: "exhibitions", current: true },
+    { name: "Expos", href: "expos", current: true },
     { name: "Théâtre", href: "theatre", current: false },
     { name: "Concerts", href: "concerts", current: false },
   ];

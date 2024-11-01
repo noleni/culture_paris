@@ -1,0 +1,60 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id    Int     @id @default(autoincrement())
+  email String  @unique
+  name  String?
+}
+
+model PlacesData {
+  id         Int      @id @default(autoincrement())
+  address_name String @unique
+  address_street String
+  address_zipcode String
+  address_city String
+  latitude       Float
+  longitude      Float
+  contact_url String
+  access_link String
+  events     EventsData[] @relation("PlaceEvents")
+  updatedAt  DateTime @updatedAt
+}
+
+model Tag {
+  id        Int        @id @default(autoincrement())
+  name      String     @unique
+  events    EventsData[] @relation("EventTags") // Relation avec EventsData
+}
+
+model EventsData {
+  id         Int      @id @default(autoincrement())
+  title       String     @unique
+  info       String
+  url        String
+  lead_text  String
+  description String
+  date_start DateTime
+  date_end   DateTime
+  date_description String
+  cover_url  String
+  cover_alt  String
+  cover_credit String
+  audience   String
+  placeId    Int          // Clé étrangère pour référencer le lieu
+  tags       Tag[]        @relation("EventTags") // Relation avec le modèle Tag
+  place      PlacesData   @relation("PlaceEvents", fields: [placeId], references: [id]) // Relation avec PlacesData
+  updatedAt  DateTime @updatedAt
+}
