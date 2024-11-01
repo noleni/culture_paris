@@ -16,11 +16,13 @@ interface Event {
 interface EventsListProps {
   currentEvents: Event[]; // tableau d'événements
   toComeEvents: Event[]; // tableau d'événements à venir
+  tag: string;
 }
 
 const EventsList: React.FC<EventsListProps> = ({
   currentEvents,
   toComeEvents,
+  tag
 }) => {
   return (
     <div>
@@ -36,7 +38,7 @@ const EventsList: React.FC<EventsListProps> = ({
               address_name={event.place?.address_name}
               date_start={event.date_start.toLocaleDateString()}
               date_end={event.date_end.toLocaleDateString()}
-              onClick={() => console.log("Click on event", event.id)}
+              href={`/${tag}/${event.id}`}
             />
           ))
         ) : (
@@ -55,6 +57,7 @@ const EventsList: React.FC<EventsListProps> = ({
               address_name={event.place?.address_name}
               date_start={event.date_start.toLocaleDateString()}
               date_end={event.date_end.toLocaleDateString()}
+              href={`/${tag}/${event.id}`}
             />
           ))
         ) : (

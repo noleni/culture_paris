@@ -10,6 +10,7 @@ const TheatrePage = async () => {
     <EventsList
       currentEvents={currentTheatre}
       toComeEvents={toComeTheatre}
+      tag="theatre"
     />
   );
 };

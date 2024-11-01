@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 import styles from "../styles/Card.module.scss";
 
 interface CardProps {
@@ -9,12 +10,12 @@ interface CardProps {
   address_name: string;
   date_start: string;
   date_end: string;
-  onClick?: () => void;
+  href: string;
 }
 
 const Card: React.FC<CardProps> = (props) => {
   return (
-    <div className={styles.card} onClick={props.onClick}>
+    <Link className={styles.card} href={props.href}>
       <h4>{props.title}</h4>
       <div>
         <Image
@@ -31,7 +32,7 @@ const Card: React.FC<CardProps> = (props) => {
           {new Date(props.date_end).toLocaleDateString()}
         </small>
       </div>
-    </div>
+    </Link>
   );
 };
 

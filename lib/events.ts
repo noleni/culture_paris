@@ -42,3 +42,16 @@ export async function getToComeEvents(tag : string) {
 
   return events;
 }
+
+export async function getEventById(id : number) {
+  const event = await prisma.eventsData.findUnique({
+    where: {
+      id,
+    },
+    include: {
+      place: true,
+    },
+  });
+
+  return event;
+}

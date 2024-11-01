@@ -11,6 +11,7 @@ const ExposPage = async () => {
     <EventsList
       currentEvents={currentExpos}
       toComeEvents={toComeExpos}
+      tag="expos"
     />
   );
 };
