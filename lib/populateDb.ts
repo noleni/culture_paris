@@ -34,9 +34,7 @@ interface EventData {
   tags: string[]; // Cela représente les tags, en supposant qu'ils soient fournis sous forme de tableau de chaînes
 }
 
-async function createTags() {
-  const tags = ["Expo", "Danse", "Concert", "Théâtre"];
-
+async function createTags(tags: string[]) {
   for (const tagName of tags) {
     await prisma.tag.upsert({
       where: { name: tagName },
@@ -158,7 +156,12 @@ async function fetchDataAndPopulateDB() {
       ); // Ajouter les résultats à la liste
     }
 
-    await createTags();
+    const allTags: Set<string> = new Set();
+    results.forEach((item) => {
+      item.tags.forEach((tag: string) => allTags.add(tag));
+    });
+
+    await createTags(Array.from(allTags));
 
     for (const item of results) {
       const placeData = await createPlace(item);

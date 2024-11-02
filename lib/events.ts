@@ -4,7 +4,6 @@ const prisma = new PrismaClient();
 
 export async function getCurrentEvents(tag : string) {
   // Récupérer tous les événements avec le tag "Expo"
-  const today = new Date();
   const events = await prisma.eventsData.findMany({
     where: {
       tags: {
@@ -12,12 +11,11 @@ export async function getCurrentEvents(tag : string) {
           name: tag,
         },
       },
-      date_start: { lte: today }, // date_start est antérieure ou égale à aujourd'hui
-      date_end: { gte: today },
     },
     include: {
       place: true, // Inclure les informations sur le lieu
     },
+    // retourner les propriétés nécessaires
   });
 
   return events;
@@ -50,6 +48,7 @@ export async function getEventById(id : number) {
     },
     include: {
       place: true,
+      tags: true,
     },
   });
 

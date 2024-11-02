@@ -6,6 +6,7 @@ interface Event {
   title: string;
   cover_url: string;
   cover_alt: string;
+  audience: string;
   place: {
     address_name: string;
   };
@@ -15,43 +16,28 @@ interface Event {
 
 interface EventsListProps {
   currentEvents: Event[]; // tableau d'événements
-  toComeEvents: Event[]; // tableau d'événements à venir
   tag: string;
 }
 
 const EventsList: React.FC<EventsListProps> = ({
   currentEvents,
-  toComeEvents,
   tag
 }) => {
   return (
     <div>
-      <h2>Actuellement</h2>
-      <div className="carroussel">
+      <div className="filters">
+        <button className="cta">Aujourd&apos;hui</button>
+        <button className="cta">Ce week-end</button>
+        <button className="cta">A venir</button>
+        <button className="cta">Adaptées aux plus petits</button>
+      </div>
+      <div className="grid">
         {currentEvents.length > 0 ? (
           currentEvents.map((event) => (
             <Card
               key={event.id}
               title={event.title}
-              cover_url={event.cover_url}
-              cover_alt={event.cover_alt}
-              address_name={event.place?.address_name}
-              date_start={event.date_start.toLocaleDateString()}
-              date_end={event.date_end.toLocaleDateString()}
-              href={`/${tag}/${event.id}`}
-            />
-          ))
-        ) : (
-          <p>Aucun événement trouvé.</p>
-        )}
-      </div>
-      <h2>À venir</h2>
-      <div className="carroussel">
-        {toComeEvents.length > 0 ? (
-          toComeEvents.map((event) => (
-            <Card
-              key={event.id}
-              title={event.title}
+              audience={event.audience}
               cover_url={event.cover_url}
               cover_alt={event.cover_alt}
               address_name={event.place?.address_name}

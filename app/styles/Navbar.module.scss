@@ -14,35 +14,28 @@
     .input {
       width: 260px;
       padding: 0.5rem 1rem;
-      border: 1px solid $color-surface-a20;
+      border: 1px solid;
       border-top-left-radius: 0.25rem;
       border-bottom-left-radius: 0.25rem;
-      background-color: $color-surface-a0;
-      color: $color-surface-a40;
       transition: border-color 0.2s;
 
+      @include gthemed {
+        color: t("surface40");
+        background-color: t("surface0");
+        border-color: t("surface20");
+      }
+
       &:focus {
-        border-color: $color-primary-a40;
+        @include gthemed {
+          border-color: t("base0");
+        }
       }
     }
 
-    .button {
-      padding: 0.5rem;
-      border: none;
-      border-top-right-radius: 0.25rem;
-      border-bottom-right-radius: 0.25rem;
-      background-color: $color-primary-a40;
-      color: $color-surface-a0;
-      cursor: pointer;
-      transition: background-color 0.2s;
-
+    .cta {
       svg {
-        width: 18px;
-        height: 18px;
-      }
-
-      &:hover {
-        // background-color: $color-primary-a60;
+        width: 22px;
+        height: 22px;
       }
     }
   }
@@ -57,15 +50,20 @@
 
       .link {
         text-decoration: none;
-        color: $color-surface-a40;
         transition: color 0.2s;
+
+        @include gthemed {
+          color: t("base10");
+        }
 
         &.active {
           font-weight: 600;
         }
 
         &:hover {
-          color: $color-primary-a40;
+          @include gthemed {
+            color: t("base20");
+          }
         }
       }
     }
