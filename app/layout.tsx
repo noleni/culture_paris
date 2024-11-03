@@ -26,10 +26,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
-      <body className={`${geistSans.variable} ${geistMono.variable} ${true ? "theme--dark" : "theme--light"}`}>
+    <html lang="en" className="light">
+      <body className={`${geistSans.variable} ${geistMono.variable} ${false ? "theme--dark" : "theme--light"}`}>
         <Navbar />
         <main>{children}</main>
+        <footer>
+          <p>Footer</p>
+        </footer>
       </body>
     </html>
   );

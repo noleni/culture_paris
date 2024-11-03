@@ -1,21 +1,20 @@
 .container {
   display: flex;
   width: 100%;
-  max-width: 100vw; // Limite la largeur au viewport
-  overflow: hidden; // Empêche le débordement
+  max-width: 100vw; 
+  overflow: hidden;
 
   .content {
-    flex-grow: 1; // Prend l’espace restant
+    flex-grow: 1;
     min-width: 0;
 
     .text-section {
       .cover {
         position: relative;
-        width: 100%; // Corriger l'utilisation de "quotes"
+        width: 100%;
         height: 0;
-        padding-bottom: 50%; // Ajustez ce pourcentage selon le ratio souhaité
+        padding-bottom: 50%;
 
-        // Ajout d'un pseudo-élément pour le dégradé
         &::before {
           content: "";
           position: absolute;
@@ -25,30 +24,41 @@
           bottom: 0;
           background: linear-gradient(
             to bottom,
-            rgba(var(--surface0rgb), 0.5),
+            rgba(var(--surface0rgb), 0.2),
             rgba(var(--surface0rgb), 1)
           );
-          z-index: 1; // S'assure que le dégradé est au-dessus de l'image mais en dessous du texte
+          z-index: 1;
         }
 
-        // Style de l'image
         img {
           position: absolute;
           top: 0;
           left: 0;
           width: 100%;
           height: 100%;
-          object-fit: cover; // Remplit le conteneur
+          object-fit: cover;
         }
 
-        h2 {
-          position: absolute; // Position absolue pour superposer sur l'image
-          top: 10%; // Ajustez selon vos besoins
+        .title {
+          position: absolute;
+          top: 10%;
           left: 50%;
-          transform: translateX(-50%); // Centrer horizontalement
-          color: white; // Couleur du texte
-          z-index: 2; // Au-dessus du dégradé
-          text-align: center; // Centrer le texte
+          transform: translateX(-50%);
+          z-index: 2;
+          text-align: center;
+          background-color: var(--primary40);
+          padding: 0.5rem 1rem;
+        }
+
+        .actions {
+          position: absolute;
+          bottom: 10%;
+          left: 50%;
+          transform: translateX(-50%);
+          z-index: 2;
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
         }
       }
 

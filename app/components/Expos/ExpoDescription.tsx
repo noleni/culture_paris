@@ -3,6 +3,7 @@ import * as DOMPurify from "dompurify";
 import Slider from "react-slick";
 import Image from "next/image";
 import styles from "../../styles/carrousel.module.scss";
+import { IoMdHeartEmpty } from "react-icons/io";
 
 interface ExpoProps {
   content: {
@@ -73,18 +74,28 @@ const ExpoDescription = ({ content }: ExpoProps) => {
 
     return (
       <div className={styles.content}>
-        {/* Texte de l'événement */}
         <div className={styles["text-section"]}>
           <div className={styles.cover}>
             <Image
               src={content.cover_url}
-              alt={content.cover_alt || "Cover image"} // Ajout d'une valeur par défaut
+              alt={content.cover_alt || "Cover image"}
               fill
-              // sizes="(max-width: 600px) 100vw, (max-width: 1200px) 100vw, 33vw"
-              style={{ objectFit: "cover" }} // Ajout du style ici
+              style={{ objectFit: "cover" }}
               priority
             />
-            <h2>{content.title}</h2>
+            <div className={styles.title}>
+              <h2>{content.title}</h2>
+            </div>
+            <div className={styles.actions}>
+              <button type="button" className="cta">
+                <IoMdHeartEmpty />
+                Ajouter aux favoris
+              </button>
+              <button type="button" className="cta">
+                <IoMdHeartEmpty />
+                Envie d&apos;y aller
+              </button>
+            </div>
           </div>
           <div className={styles.texts}>
             <h4>{content.lead_text}</h4>
@@ -99,7 +110,6 @@ const ExpoDescription = ({ content }: ExpoProps) => {
           </div>
         </div>
 
-        {/* Carrousel pour les figures */}
         {figures.length > 0 && (
           <Slider {...sliderSettings}>
             {figures.map((figure, index) => (
