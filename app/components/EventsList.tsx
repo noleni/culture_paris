@@ -41,8 +41,8 @@ const EventsList: React.FC<EventsListProps> = ({
               cover_url={event.cover_url}
               cover_alt={event.cover_alt}
               address_name={event.place?.address_name}
-              date_start={event.date_start.toLocaleDateString()}
-              date_end={event.date_end.toLocaleDateString()}
+              date_start={event.date_start}
+              date_end={event.date_end}
               href={`/${tag}/${event.id}`}
             />
           ))

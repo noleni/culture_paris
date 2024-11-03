@@ -1,11 +1,14 @@
 @use "../styles/index" as *;
 
 .card {
-  @include gthemed {
-    background-color: t("surface20");
-    color: t("base20");
-    box-shadow: 0 0 10px rgba(t("surface50"), 0.1);
-  }
+  // @include gthemed {
+  //   background-color: t("surface20");
+  //   color: t("base20");
+  //   box-shadow: 0 0 10px rgba(t("surface50"), 0.1);
+  // }
+  background-color: var(--surface20);
+  color: var(--base20);
+  box-shadow: 0 0 10px rgba(var(--surface50), 0.1);
   opacity: 0.8;
   border-radius: 6px;
   padding: 12px 0;
@@ -19,10 +22,12 @@
   transition: all 0.2s;
 
   &:hover {
-    @include gthemed {
-      background-color: t("surface0");
-      color: t("base30");
-    }
+    // @include gthemed {
+    //   background-color: t("surface0");
+    //   color: t("base30");
+    // }
+    background-color: var(--surface0);
+    color: var(--base30);
     opacity: 1;
   }
 

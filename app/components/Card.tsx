@@ -11,8 +11,8 @@ interface CardProps {
   cover_url: string;
   cover_alt: string;
   address_name: string;
-  date_start: string;
-  date_end: string;
+  date_start: Date;
+  date_end: Date;
   audience: string;
   href: string;
 }
@@ -26,14 +26,23 @@ const Card: React.FC<CardProps> = (props) => {
         <IoMdHeartEmpty />
       </div>
       <div>
-        {/petits/.test(props.audience) &&<TbMoodKid />}
-        <Image
-          src={props.cover_url}
-          alt={props.cover_alt || "Cover image"}
-          layout="responsive"
-          width={280}
-          height={140}
-        />
+        {/petits/.test(props.audience) && <TbMoodKid />}
+        <div
+          style={{
+            position: "relative",
+            width: "100%",
+            height: "0",
+            paddingBottom: "50%",
+          }}
+        >
+          <Image
+            src={props.cover_url}
+            alt={props.cover_alt || "Cover image"}
+            fill
+            sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            style={{ objectFit: "cover" }}
+          />
+        </div>
         <div className="tag">
           <p>{props.address_name}</p>
         </div>

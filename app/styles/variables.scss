@@ -8,6 +8,7 @@ $themes: (
     base50: #707070,
 
     surface0: #121212,
+    surface0rgb: (18, 18, 18),
     surface10: #282828,
     surface20: #3f3f3f,
     surface30: #575757,
@@ -15,6 +16,7 @@ $themes: (
     surface50: #8b8b8b,
 
     primary0: #0ec788,
+    primary0rgb: (14, 199, 136),
     primary10: #47ce95,
     primary20: #66d5a2,
     primary30: #80dbaf,
@@ -30,6 +32,7 @@ $themes: (
     base50: #bcbcbc,
 
     surface0: #ffffff,
+    surface0rgb: (255, 255, 255),
     surface10: #fafafa,
     surface20: #f5f5f5,
     surface30: #efefef,
@@ -37,6 +40,7 @@ $themes: (
     surface50: #e3e3e3,
 
     primary0: #0ec788,
+    primary0rgb: (14, 199, 136),
     primary10: #47ce95,
     primary20: #66d5a2,
     primary30: #80dbaf,
@@ -45,49 +49,16 @@ $themes: (
   ),
 );
 
-
-@mixin gthemed() {
-  @each $theme, $map in $themes {
-    :global(.theme--#{$theme}) & {
-      $theme-map: () !global;
-      @each $key, $submap in $map {
-        $value: map-get(map-get($themes, $theme), "#{$key}");
-        $theme-map: map-merge(
-          $theme-map,
-          (
-            $key: $value,
-          )
-        ) !global;
-      }
-      @content;
-      $theme-map: null !global;
-    }
+@mixin theme($theme-name) {
+  @each $key, $value in map-get($themes, $theme-name) {
+    --#{$key}: #{$value};
   }
 }
 
-@mixin themed() {
-  @each $theme, $map in $themes {
-    .theme--#{$theme} & {
-      $theme-map: () !global;
-      @each $key, $submap in $map {
-        $value: map-get(map-get($themes, $theme), "#{$key}");
-        $theme-map: map-merge(
-          $theme-map,
-          (
-            $key: $value,
-          )
-        ) !global;
-      }
-      @content;
-      $theme-map: null !global;
-    }
-  }
+.theme--light {
+  @include theme(light); // Applique le thème par défaut (light)
 }
 
-@function t($key: "base0") {
-  @if not $theme-map {
-    @warn "t() function can only be used inside a themed block";
-    @return null;
-  }
-  @return map-get($theme-map, $key);
+.theme--dark {
+  @include theme(dark); // Applique le thème dark lorsqu'on ajoute cette classe
 }

@@ -1,13 +1,6 @@
 // styles/globals.scss
 @use "./index.scss" as *;
 
-.theme--dark {
-  color: map-get(map-get($themes, "dark"), "base1");
-}
-
-.theme--light {
-  color: map-get(map-get($themes, "light"), "base1");
-}
 
 // Réinitialisation des styles par défaut
 * {
@@ -24,31 +17,19 @@ html {
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;
-  &.dark {
-    color-scheme: dark;
-    background-color: map-get(map-get($themes, "dark"), "base2");
-  }
-  &.light {
-    color-scheme: light;
-    background-color: map-get(map-get($themes, "light"), "base2");
-  }
 }
 
 // Styles typographiques
 body {
   font-family: "inter", sans-serif;
   line-height: 1.6;
-  @include themed {
-    color: t("surface40");
-    background-color: t("surface0");
-  }
+  color: var(--surface40);
+  background-color: var(--surface0);
 }
 
 a {
   text-decoration: none;
-  @include themed {
-    color: t("surface40");
-  }
+  color: var(--surface40);
 }
 
 ul {
@@ -56,8 +37,8 @@ ul {
 }
 
 main {
-  margin: 20px 40px;
-    justify-content: center;
+  margin: 20px 0;
+  justify-content: center;
 }
 
 // Styles de mise en page
@@ -80,15 +61,11 @@ main {
   transition: background-color 0.2s;
   border: none;
   border-radius: 0.25rem;
-  @include themed {
-    color: t("base0");
-    background-color: t("primary20");
-  }
+  color: var(--base0);
+  background-color: var(--primary0);
 
   &:hover {
-    @include themed {
-      background-color: t("primary0");
-    }
+    background-color: var(--primary0);
   }
 }
 
@@ -105,9 +82,7 @@ aside {
   width: 300px;
   flex-shrink: 0; // empêche la réduction de la taille
   padding: 12px;
-  @include themed {
-    background-color: t("surface10");
-  }
+  background-color: var(--surface10);
 }
 
 .grid {
@@ -119,20 +94,16 @@ aside {
   margin: 0 auto; // centre la grille
 }
 
-  .tag {
-    @include themed {
-      color: t("base30");
-      border: 0.5px solid rgba(14, 199, 136, 0.8);
-      background-color: rgba(14, 199, 136, 0.2);
-    }
-    width: fit-content;
-    border-radius: 8px;
-    padding: 2px 6px;
+.tag {
+  color: var(--base30);
+  border: 0.5px solid rgba(14, 199, 136, 0.8);
+  background-color: rgba(14, 199, 136, 0.2);
+  width: fit-content;
+  border-radius: 8px;
+  padding: 2px 6px;
 
-    p {
-      font-size: 0.8rem;
-      @include themed {
-        color: t("surface10");
-      }
-    }
+  p {
+    font-size: 0.8rem;
+    color: var(--surface10);
   }
+}

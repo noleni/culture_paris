@@ -18,17 +18,13 @@
       border-top-left-radius: 0.25rem;
       border-bottom-left-radius: 0.25rem;
       transition: border-color 0.2s;
-
-      @include gthemed {
-        color: t("surface40");
-        background-color: t("surface0");
-        border-color: t("surface20");
-      }
+      color: var(--surface40);
+      background-color: var(--surface0);
+      border-color: var(--surface20);
+      border-color: var(--surface20);
 
       &:focus {
-        @include gthemed {
-          border-color: t("base0");
-        }
+        border-color: var(--base0);
       }
     }
 
@@ -51,19 +47,14 @@
       .link {
         text-decoration: none;
         transition: color 0.2s;
-
-        @include gthemed {
-          color: t("base10");
-        }
+        color: var(--base10);
 
         &.active {
           font-weight: 600;
         }
 
         &:hover {
-          @include gthemed {
-            color: t("base20");
-          }
+          color: var(--base20);
         }
       }
     }
