@@ -1,15 +1,10 @@
 @use "../styles/index" as *;
 
 .card {
-  // @include gthemed {
-  //   background-color: t("surface20");
-  //   color: t("base20");
-  //   box-shadow: 0 0 10px rgba(t("surface50"), 0.1);
-  // }
-  background-color: var(--surface20);
+  background-color: var(--surface10);
   color: var(--base20);
   box-shadow: 0 0 10px rgba(var(--surface50), 0.1);
-  opacity: 0.8;
+  opacity: 0.9;
   border-radius: 6px;
   padding: 12px 0;
   width: auto;
@@ -20,12 +15,9 @@
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   cursor: pointer;
   transition: all 0.2s;
+  text-align: -webkit-center;
 
   &:hover {
-    // @include gthemed {
-    //   background-color: t("surface0");
-    //   color: t("base30");
-    // }
     background-color: var(--surface0);
     color: var(--base30);
     opacity: 1;

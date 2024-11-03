@@ -94,15 +94,10 @@ aside {
 }
 
 .tag {
-  color: var(--base30);
-  border: 0.5px solid rgba(14, 199, 136, 0.8);
-  background-color: rgba(14, 199, 136, 0.2);
+  color: var(--primary0);
+  background-color: rgba(14, 199, 136, 0.1);
   width: fit-content;
   border-radius: 8px;
   padding: 2px 6px;
-
-  p {
-    font-size: 0.8rem;
-    color: var(--surface10);
-  }
+  font-size: 0.8rem;
 }
