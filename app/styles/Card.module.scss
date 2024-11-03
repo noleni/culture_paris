@@ -19,7 +19,7 @@
 
   &:hover {
     background-color: var(--surface0);
-    color: var(--base30);
+    color: var(--base10);
     opacity: 1;
   }
 
@@ -33,7 +33,7 @@
     line-height: 1.5em;
     margin: 0 6px;
     font-size: 0.8rem;
-    font-weight: 400;
+    font-weight: bold;
   }
 
   .card__icons {

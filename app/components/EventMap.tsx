@@ -13,12 +13,11 @@ const customIcon = new L.Icon({
   iconRetinaUrl:
     "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon-2x.png",
   shadowUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png",
-  iconSize: [25, 41], // Taille par défaut des icônes Leaflet
-  iconAnchor: [12, 41], // Point d'ancrage de l'icône
-  popupAnchor: [1, -34], // Position de l'ancrage pour le popup
-  shadowSize: [41, 41], // Taille de l'ombre
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41],
 });
-
 
 const EventMap: React.FC<EventMapProps> = ({ latitude, longitude }) => {
   const googleMapsUrl = `https://www.google.com/maps?q=${latitude},${longitude}`;
@@ -33,8 +32,8 @@ const EventMap: React.FC<EventMapProps> = ({ latitude, longitude }) => {
         style={{ height: "300px", width: "100%" }}
       >
         <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url={`https://api.maptiler.com/maps/toner/{z}/{x}/{y}.png?key=${process.env.NEXT_PUBLIC_MAP_API_KEY}`}
+          attribution='&copy; <a href="https://www.maptiler.com/copyright/">MapTiler</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         />
         <Marker position={[latitude, longitude]} icon={customIcon} />
       </MapContainer>
