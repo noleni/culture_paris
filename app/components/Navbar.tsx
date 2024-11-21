@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import styles from "../styles/Navbar.module.scss";
+import styles from "./navbar.module.scss";
 import { AiOutlineSearch, AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 
 const Navbar: React.FC = () => {

@@ -1,8 +1,14 @@
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "./prisma";
+import { Prisma } from "@prisma/client";
+import type { EventsData } from "@prisma/client";
 
-const prisma = new PrismaClient();
+export type EventWithRelations = Prisma.EventsDataGetPayload<{
+  include: { tags: true; place: true };
+}>;
 
-export async function getCurrentEvents(tag : string) {
+export async function getCurrentEvents(
+  tag: string
+): Promise<EventWithRelations[]> {
   // Récupérer tous les événements avec le tag "Expo"
   const events = await prisma.eventsData.findMany({
     where: {
@@ -14,6 +20,7 @@ export async function getCurrentEvents(tag : string) {
     },
     include: {
       place: true, // Inclure les informations sur le lieu
+      tags: true, // Inclure les tags
     },
     // retourner les propriétés nécessaires
   });
@@ -21,9 +28,9 @@ export async function getCurrentEvents(tag : string) {
   return events;
 }
 
-export async function getToComeEvents(tag : string) {
+export async function getToComeEvents(tag: string): Promise<EventsData[]> {
   // Récupérer tous les événements avec le tag "Expo"
-  const today = new Date();
+
   const events = await prisma.eventsData.findMany({
     where: {
       tags: {
@@ -31,7 +38,6 @@ export async function getToComeEvents(tag : string) {
           name: tag,
         },
       },
-      date_start: { gte: today }, // date_start est postérieure ou égale à aujourd'hui
     },
     include: {
       place: true, // Inclure les informations sur le lieu
@@ -41,16 +47,18 @@ export async function getToComeEvents(tag : string) {
   return events;
 }
 
-export async function getEventById(id : number) {
+export async function getEventById(id: string): Promise<EventsData | null> {
   const event = await prisma.eventsData.findUnique({
     where: {
-      id,
+      id: id,
     },
     include: {
       place: true,
       tags: true,
     },
   });
+
+  console.log(event);
 
   return event;
 }

@@ -40,21 +40,21 @@ model Tag {
 }
 
 model EventsData {
-  id         Int      @id @default(autoincrement())
+  id         String      @id @default(cuid()) 
   title       String     @unique
   info       String
   url        String
   lead_text  String
   description String
-  date_start DateTime
-  date_end   DateTime
+  date_start String
+  date_end   String
   date_description String
   cover_url  String
   cover_alt  String
   cover_credit String
   audience   String
-  placeId    Int          // Clé étrangère pour référencer le lieu
   tags       Tag[]        @relation("EventTags") // Relation avec le modèle Tag
-  place      PlacesData   @relation("PlaceEvents", fields: [placeId], references: [id]) // Relation avec PlacesData
+  placeId    Int?
+  place      PlacesData?  @relation("PlaceEvents", fields: [placeId], references: [id])
   updatedAt  DateTime @updatedAt
 }

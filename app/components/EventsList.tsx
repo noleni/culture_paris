@@ -1,28 +1,14 @@
 "use client";
 import Card from "./Card";
+import { EventWithRelations } from "../../lib/events";
 
-interface Event {
-  id: number;
-  title: string;
-  cover_url: string;
-  cover_alt: string;
-  audience: string;
-  place: {
-    address_name: string;
-  };
-  date_start: Date;
-  date_end: Date;
-}
-
-interface EventsListProps {
-  currentEvents: Event[]; // tableau d'événements
+type EventsListProps = {
+  currentEvents: EventWithRelations[];
   tag: string;
-}
+};
 
-const EventsList: React.FC<EventsListProps> = ({
-  currentEvents,
-  tag
-}) => {
+const EventsList: React.FC<EventsListProps> = ({ currentEvents, tag }) => {
+  console.log(currentEvents[0].id, typeof currentEvents[0].id);
   return (
     <div>
       <div className="filters">
@@ -37,13 +23,13 @@ const EventsList: React.FC<EventsListProps> = ({
             <Card
               key={event.id}
               title={event.title}
-              audience={event.audience}
               cover_url={event.cover_url}
+              cover_credit={event.cover_credit}
               cover_alt={event.cover_alt}
-              address_name={event.place?.address_name}
+              address_name={event.place?.address_name || ""}
               date_start={event.date_start}
               date_end={event.date_end}
-              href={`/${tag}/${event.id}`}
+              href={`/expos/${event.id}`}
             />
           ))
         ) : (

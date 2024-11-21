@@ -8,43 +8,78 @@ interface LatLon {
   lat: number;
 }
 
-interface PlaceData {
+interface RawPlaceData {
   address_name: string;
-  address_street: string;
-  address_zipcode: string;
-  address_city: string;
-  lat_lon: LatLon;
-  contact_url: string | null;
-  access_link: string | null;
+  address_street?: string;
+  address_zipcode?: string;
+  address_city?: string;
+  lat_lon?: LatLon;
+  contact_url?: string;
+  access_link?: string;
 }
 
-interface EventData {
-  id: string; // ou number, selon votre API
-  url: string;
+interface RawEventData {
+  id: string;
   title: string;
-  lead_text: string;
-  description: string;
-  date_start: string; // Gardez ceci en tant que chaîne si vous prévoyez de le convertir plus tard
-  date_end: string; // Gardez ceci en tant que chaîne si vous prévoyez de le convertir plus tard
-  date_description: string | null;
-  cover_url: string | null;
-  cover_alt: string | null;
-  cover_credit: string | null;
-  audience: string | null;
-  tags: string[]; // Cela représente les tags, en supposant qu'ils soient fournis sous forme de tableau de chaînes
+  info?: string;
+  url: string;
+  date_start: Date;
+  date_end?: Date;
+  date_description?: string;
+  description?: string;
+  lead_text?: string;
+  cover_url?: string;
+  cover_credit?: string;
+  cover_alt?: string;
+  audience?: string;
+  tags: string[];
 }
 
-async function createTags(tags: string[]) {
-  for (const tagName of tags) {
-    await prisma.tag.upsert({
-      where: { name: tagName },
-      update: {},
-      create: { name: tagName },
+async function createTags(
+  events: Array<{
+    title: string;
+    tags: string[]; // Liste des tags associés à l'événement
+  }>
+) {
+  const createdTags = [];
+
+  for (const event of events) {
+    const { tags } = event;
+
+    for (const tagName of tags) {
+      let tag = await prisma.tag.findUnique({
+        where: {
+          name: tagName,
+        },
+      });
+
+      if (!tag) {
+        tag = await prisma.tag.create({
+          data: {
+            name: tagName,
+          },
+        });
+      }
+
+      createdTags.push(tag);
+    }
+
+    // Associe les tags à l'événement dans la base de données
+    await prisma.eventsData.update({
+      where: {
+        title: event.title, // Trouve l'événement par son titre
+      },
+      data: {
+        tags: {
+          connect: createdTags.map((tag) => ({ id: tag.id })), // Connecte les tags à l'événement
+        },
+      },
     });
   }
 }
 
-async function createPlace(placeData: PlaceData) {
+
+async function createPlace(placeData: RawPlaceData) {
   const {
     address_name,
     address_street,
@@ -55,7 +90,7 @@ async function createPlace(placeData: PlaceData) {
     access_link,
   } = placeData;
 
-  // Vérifier si le lieu existe déjà
+  // Vérifier si le lieu existe déjà via `address_name`
   const existingPlace = await prisma.placesData.findUnique({
     where: {
       address_name,
@@ -70,66 +105,73 @@ async function createPlace(placeData: PlaceData) {
   return await prisma.placesData.create({
     data: {
       address_name,
-      address_street,
-      address_zipcode,
-      address_city,
-      latitude: lat_lon.lat,
-      longitude: lat_lon.lon,
-      contact_url: contact_url ?? "", // Provide a default value of an empty string if contact_url is null
-      access_link: access_link ?? "", // Provide a default value of an empty string if access_link is null
+      address_street: address_street || "",
+      address_zipcode: address_zipcode || "",
+      address_city: address_city || "",
+      latitude: lat_lon?.lat || 0,
+      longitude: lat_lon?.lon || 0,
+      contact_url: contact_url || "",
+      access_link: access_link || "",
     },
   });
 }
 
-async function createEvent(eventData: EventData, locationId: number) {
+async function createEvent(eventData: RawEventData, placeId: number) {
   const {
     title,
-    lead_text,
-    description,
     date_start,
     date_end,
+    date_description,
+    description,
+    lead_text,
     cover_url,
-    cover_alt,
     cover_credit,
+    cover_alt,
     audience,
     tags,
   } = eventData;
 
-  // Vérifier si l'événement existe déjà
+  // Vérifie si l'événement existe déjà dans la base de données
   const existingEvent = await prisma.eventsData.findUnique({
     where: {
-      title, // ou d'autres critères uniques comme title + date_start
+      title,
     },
   });
 
-  // Si l'événement existe, le retourner ; sinon, le créer
+  // Si l'événement existe déjà, retourne-le
   if (existingEvent) {
     return existingEvent;
   }
 
+  // Recherche les tags existants
   const eventTags = await prisma.tag.findMany({
-    where: { name: { in: tags } },
+    where: {
+      name: {
+        in: tags, // Associe les tags via leur nom
+      },
+    },
   });
 
+  // Création de l'événement
   return await prisma.eventsData.create({
     data: {
       title,
-      info: description,
+      info: description || "",
       url: eventData.url,
-      lead_text,
-      description,
-      date_start: new Date(date_start),
-      date_end: new Date(date_end),
-      date_description: eventData.date_description ?? "",
-      cover_url: cover_url ?? "",
-      cover_alt: cover_alt ?? "", // Provide a default value of an empty string if cover_alt is null
-      cover_credit: cover_credit ?? "", // Provide a default value of an empty string if cover_credit is null
-      audience: audience ?? "", // Provide a default value of an empty string if audience is null
+      date_start: date_start ?? "",
+      date_end: date_end ?? "",
+      date_description: date_description || "",
+      description: description || "",
+      lead_text: lead_text || "",
+      cover_url: cover_url || "",
+      cover_credit: cover_credit || "",
+      cover_alt: cover_alt || "",
+      audience: audience || "",
       tags: {
         connect: eventTags.map((tag) => ({ id: tag.id })),
       },
       place: {
-        connect: { id: locationId },
+        connect: { id: placeId },
       },
     },
   });
@@ -139,36 +181,34 @@ async function fetchDataAndPopulateDB() {
   try {
     console.log("Début de l'insertion des données...");
     const tags = ["Expo", "Danse", "Concert", "Théâtre"];
-    const results = [];
+    const results: (RawPlaceData & RawEventData)[] = [];
 
-    // Effectuer des appels API pour chaque tag
     for (const tag of tags) {
-      const response = await axios.get(
+      const response = await axios.get<{
+        results: (RawPlaceData & RawEventData)[];
+      }>(
         `https://opendata.paris.fr/api/explore/v2.1/catalog/datasets/que-faire-a-paris-/records?where=tags%20like%20%22${encodeURIComponent(
           tag
         )}%22&limit=100`
       );
+
       results.push(
         ...response.data.results.filter(
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (item: any) => item.address_name !== null
         )
-      ); // Ajouter les résultats à la liste
+      );
     }
 
-    const allTags: Set<string> = new Set();
-    results.forEach((item) => {
-      item.tags.forEach((tag: string) => allTags.add(tag));
-    });
-
-    await createTags(Array.from(allTags));
-
-    for (const item of results) {
-      const placeData = await createPlace(item);
-      await createEvent(item, placeData.id);
+    for (const rawData of results) {
+      const place = await createPlace(rawData);
+      await createEvent(rawData, place.id);
+      await createTags([{ title: rawData.title, tags: rawData.tags }]);
     }
+
+    console.log("Données insérées avec succès !");
   } catch (error) {
-    console.error("Erreur lors de l'insertion des données :", error);
+    console.error("Erreur générale :", error);
   } finally {
     await prisma.$disconnect();
   }

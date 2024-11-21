@@ -24,12 +24,11 @@ const EventMap: React.FC<EventMapProps> = ({ latitude, longitude }) => {
   const citymapperUrl = `https://citymapper.com/directions?endcoord=${latitude},${longitude}`;
 
   return !latitude || !longitude ? null : (
-    <div>
       <MapContainer
         center={[latitude, longitude]}
         zoom={13}
         scrollWheelZoom={false}
-        style={{ height: "300px", width: "100%" }}
+        style={{ height: "300px", flexGrow: 1 }}
       >
         <TileLayer
           url={`https://api.maptiler.com/maps/toner/{z}/{x}/{y}.png?key=${process.env.NEXT_PUBLIC_MAP_API_KEY}`}
@@ -37,7 +36,6 @@ const EventMap: React.FC<EventMapProps> = ({ latitude, longitude }) => {
         />
         <Marker position={[latitude, longitude]} icon={customIcon} />
       </MapContainer>
-    </div>
   );
 };
 

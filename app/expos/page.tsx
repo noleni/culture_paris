@@ -2,16 +2,13 @@
 import EventsList from "../components/EventsList";
 import { getCurrentEvents } from "../../lib/events";
 
-
 const ExposPage = async () => {
-  const currentExpos = await getCurrentEvents("Expo");
-
-  return (
-    <EventsList
-      currentEvents={currentExpos}
-      tag="expos"
-    />
-  );
+  try {
+    const currentExpos = await getCurrentEvents("Expo");
+    return <EventsList currentEvents={currentExpos} tag="Expo" />;
+  } catch {
+    return <p>Erreur lors de la récupération des expositions.</p>;
+  }
 };
 
 export default ExposPage;

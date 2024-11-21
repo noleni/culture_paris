@@ -8,12 +8,10 @@ interface ExpoPageProps {
 const ExpoPage = async ({ params }: ExpoPageProps) => {
   const { id } = await params;
 
-  const event = await getEventById(+id);
+  const event = await getEventById(id);
   if (!event) return null;
 
-  return (
-    <Expo event={event} />
-  );
+  return <Expo event={event} />;
 };
 
 export default ExpoPage;
