@@ -1,0 +1,13 @@
+.rater {
+  gap: 5px;
+  justify-content: center;
+  padding: 0.5rem 0;
+
+  label {
+    cursor: pointer;
+
+    input {
+      display: none;
+    }
+  }
+}

@@ -8,7 +8,7 @@ const ConcertsPage = async () => {
   return (
     <EventsList
       currentEvents={currentConcerts}
-      tag="concerts"
+      tag="concert"
     />
   );
 };

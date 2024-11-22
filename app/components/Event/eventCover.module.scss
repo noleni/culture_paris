@@ -1,0 +1,43 @@
+.cover {
+  position: relative; /* Nécessaire pour positionner l'image et le contenu en absolu */
+  width: 80%; /* Ajuste selon les besoins */
+  aspect-ratio: 16/9;
+  margin: 3rem auto;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    // background: linear-gradient(
+    //   to bottom,
+    //   rgba(var(--surface0rgb), 0),
+    //   rgba(var(--surface0rgb), 1)
+    // );
+  }
+
+  img {
+    width: 80%;
+    height: 80%;
+    object-fit: cover;
+  }
+
+  .title {
+    position: absolute;
+    bottom: -10%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    text-align: center;
+    line-height: 1.2;
+    background-color: var(--surface0);
+    padding: 1rem 1.5rem;
+
+    h2 {
+      font-size: 1.6rem;
+    }
+  }
+}

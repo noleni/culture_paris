@@ -14,8 +14,6 @@ interface RawPlaceData {
   address_zipcode?: string;
   address_city?: string;
   lat_lon?: LatLon;
-  contact_url?: string;
-  access_link?: string;
 }
 
 interface RawEventData {
@@ -32,6 +30,8 @@ interface RawEventData {
   cover_credit?: string;
   cover_alt?: string;
   audience?: string;
+  contact_url?: string;
+  access_link?: string;
   tags: string[];
 }
 
@@ -78,7 +78,6 @@ async function createTags(
   }
 }
 
-
 async function createPlace(placeData: RawPlaceData) {
   const {
     address_name,
@@ -86,8 +85,6 @@ async function createPlace(placeData: RawPlaceData) {
     address_zipcode,
     address_city,
     lat_lon,
-    contact_url,
-    access_link,
   } = placeData;
 
   // Vérifier si le lieu existe déjà via `address_name`
@@ -110,8 +107,6 @@ async function createPlace(placeData: RawPlaceData) {
       address_city: address_city || "",
       latitude: lat_lon?.lat || 0,
       longitude: lat_lon?.lon || 0,
-      contact_url: contact_url || "",
-      access_link: access_link || "",
     },
   });
 }
@@ -128,6 +123,15 @@ async function createEvent(eventData: RawEventData, placeId: number) {
     cover_credit,
     cover_alt,
     audience,
+    contact_url,
+    access_link,
+    contact_mail,
+    contact_facebook,
+    contact_twitter,
+    price_type,
+    price_detail,
+    access_type,
+    access_link_text,
     tags,
   } = eventData;
 
@@ -167,6 +171,15 @@ async function createEvent(eventData: RawEventData, placeId: number) {
       cover_credit: cover_credit || "",
       cover_alt: cover_alt || "",
       audience: audience || "",
+      contact_url: contact_url || "",
+      access_link: access_link || "",
+      contact_mail: contact_mail || "",
+      contact_facebook: contact_facebook || "",
+      contact_twitter: contact_twitter || "",
+      price_type: price_type || "",
+      price_detail: price_detail || "",
+      access_type: access_type || "",
+      access_link_text: access_link_text || "",
       tags: {
         connect: eventTags.map((tag) => ({ id: tag.id })),
       },

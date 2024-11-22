@@ -23,11 +23,11 @@ const Card: React.FC<CardProps> = (props) => {
         <IoMdStarOutline />
         <IoMdHeartEmpty />
       </div>
+      <div className={styles.card__title}>
+        <h4>{props.title}</h4>
+      </div>
       <div>
         <div className={styles.card__image}>
-          <div className={styles.card__title}>
-            <h4>{props.title}</h4>
-          </div>
           {props.cover_url && (
             <Image
               src={props.cover_url}

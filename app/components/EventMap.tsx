@@ -28,7 +28,7 @@ const EventMap: React.FC<EventMapProps> = ({ latitude, longitude }) => {
         center={[latitude, longitude]}
         zoom={13}
         scrollWheelZoom={false}
-        style={{ height: "300px", flexGrow: 1 }}
+        style={{ height: "300px" }}
       >
         <TileLayer
           url={`https://api.maptiler.com/maps/toner/{z}/{x}/{y}.png?key=${process.env.NEXT_PUBLIC_MAP_API_KEY}`}

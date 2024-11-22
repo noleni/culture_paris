@@ -1,0 +1,11 @@
+.event-content {
+  display: flex;
+
+  .event-content__actions {
+    background-color: var(--base0);
+  }
+
+  .event-content__texts {
+    padding: 1rem;
+  }
+}

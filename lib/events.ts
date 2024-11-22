@@ -57,8 +57,5 @@ export async function getEventById(id: string): Promise<EventsData | null> {
       tags: true,
     },
   });
-
-  console.log(event);
-
   return event;
 }

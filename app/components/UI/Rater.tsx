@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { FaStar } from "react-icons/fa";
 
+import styles from "./rater.module.scss";
+
 interface RaterProps {
   rating: number;
   setRating: (rating: number) => void;
@@ -10,18 +12,17 @@ const Rater: React.FC<RaterProps> = ({ rating, setRating }) => {
   const [hover, setHover] = useState(0); // État pour gérer le survol des étoiles
 
   return (
-    <div style={{ display: "flex", gap: "5px" }}>
-      Ma note :
+    <div className={styles.rater}>
+      <p>Ma note :</p>
       {[...Array(10)].map((_, i) => {
         const ratingValue = i + 1;
 
         return (
-          <label key={i} style={{ cursor: "pointer" }}>
+          <label key={i}>
             <input
               type="radio"
               name="rating"
               value={ratingValue}
-              style={{ display: "none" }} // Cache l'input radio
               onClick={() => setRating(ratingValue)} // Met à jour la note sélectionnée
             />
             <FaStar

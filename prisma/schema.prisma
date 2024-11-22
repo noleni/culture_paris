@@ -13,11 +13,59 @@ datasource db {
   url      = "file:./dev.db"
 }
 
-model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
 }
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model User {
+  id            String          @id @default(cuid())
+  name          String?
+  email         String?         @unique
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
 
 model PlacesData {
   id         Int      @id @default(autoincrement())
@@ -27,8 +75,6 @@ model PlacesData {
   address_city String
   latitude       Float
   longitude      Float
-  contact_url String
-  access_link String
   events     EventsData[] @relation("PlaceEvents")
   updatedAt  DateTime @updatedAt
 }
@@ -40,7 +86,7 @@ model Tag {
 }
 
 model EventsData {
-  id         String      @id @default(cuid()) 
+  id         String      @id @default(cuid())
   title       String     @unique
   info       String
   url        String
@@ -53,6 +99,15 @@ model EventsData {
   cover_alt  String
   cover_credit String
   audience   String
+  contact_url String
+  contact_mail String
+  contact_facebook String
+  contact_twitter String
+  price_type String
+  price_detail String
+  access_type String
+  access_link String
+  access_link_text String
   tags       Tag[]        @relation("EventTags") // Relation avec le modèle Tag
   placeId    Int?
   place      PlacesData?  @relation("PlaceEvents", fields: [placeId], references: [id])

@@ -8,7 +8,6 @@ type EventsListProps = {
 };
 
 const EventsList: React.FC<EventsListProps> = ({ currentEvents, tag }) => {
-  console.log(currentEvents[0].id, typeof currentEvents[0].id);
   return (
     <div>
       <div className="filters">
@@ -29,7 +28,7 @@ const EventsList: React.FC<EventsListProps> = ({ currentEvents, tag }) => {
               address_name={event.place?.address_name || ""}
               date_start={event.date_start}
               date_end={event.date_end}
-              href={`/expos/${event.id}`}
+              href={`/${tag.toLowerCase()}/${event.id}`}
             />
           ))
         ) : (
