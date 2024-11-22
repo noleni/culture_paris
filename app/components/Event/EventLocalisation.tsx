@@ -25,6 +25,7 @@ interface EventLocalisationProps {
   access_type: string;
   access_link: string;
   access_link_text: string;
+  status?: string;
 }
 
 const EventLocalisation: React.FC<EventLocalisationProps> = (props) => {
@@ -43,6 +44,7 @@ const EventLocalisation: React.FC<EventLocalisationProps> = (props) => {
           </button>
         </div>
         <div className={styles["event-localisation__section"]}>
+          <p>{props.status}</p>
           <p>
             Du {new Date(props.date_start).toLocaleDateString()} {" "}
             au {new Date(props.date_end).toLocaleDateString()}

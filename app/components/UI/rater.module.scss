@@ -1,7 +1,5 @@
 .rater {
-  gap: 5px;
-  justify-content: center;
-  padding: 0.5rem 0;
+  padding: 0.2rem 0;
 
   label {
     cursor: pointer;
@@ -9,5 +7,9 @@
     input {
       display: none;
     }
+  }
+
+  label:not(:first-of-type) {
+    margin-left: 0.2rem;
   }
 }

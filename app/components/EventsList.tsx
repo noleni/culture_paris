@@ -14,7 +14,6 @@ const EventsList: React.FC<EventsListProps> = ({ currentEvents, tag }) => {
         <button className="cta">Aujourd&apos;hui</button>
         <button className="cta">Ce week-end</button>
         <button className="cta">A venir</button>
-        <button className="cta">Adaptées aux plus petits</button>
       </div>
       <div className="grid">
         {currentEvents.length > 0 ? (

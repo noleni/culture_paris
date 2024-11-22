@@ -9,7 +9,7 @@ interface EventProps {
     description: string;
     cover_url: string;
     cover_alt: string;
-    cover_credits: string;
+    cover_credit: string;
     date_start: string;
     date_end: string;
     audience: string;
@@ -23,7 +23,14 @@ interface EventProps {
     access_link: string;
     access_link_text: string;
     tags: { id: number; name: string }[];
-    place: { address_name: string; address_street: string; address_zipcode: string; latitude: number; longitude: number };
+    place: {
+      address_name: string;
+      address_street: string;
+      address_zipcode: string;
+      latitude: number;
+      longitude: number;
+    };
+    status?: string;
   };
 }
 
@@ -42,12 +49,14 @@ const Event: React.FC<EventProps> = ({ event }) => {
     event.description
   );
 
+  console.log(event);
+
   return (
     <div>
       <EventCover
         cover_url={event.cover_url}
         cover_alt={event.cover_alt}
-        cover_credits={event.cover_credits}
+        cover_credit={event.cover_credit}
         title={event.title}
       />
       <EventContent
@@ -67,6 +76,7 @@ const Event: React.FC<EventProps> = ({ event }) => {
         access_link_text={event.access_link_text}
         lead_text={event.lead_text}
         extractedDescription={extractedDescription}
+        status={event.status}
       />
       {/* {figures.length > 0 && (
           <Slider {...sliderSettings}>

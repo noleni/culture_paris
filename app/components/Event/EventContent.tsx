@@ -25,6 +25,7 @@ interface EventContentProps {
   access_link_text: string;
   lead_text: string;
   extractedDescription: string[];
+  status?: string;
 }
 
 const EventContent: React.FC<EventContentProps> = (props) => {
@@ -44,6 +45,7 @@ const EventContent: React.FC<EventContentProps> = (props) => {
         access_type={props.access_type}
         access_link={props.access_link}
         access_link_text={props.access_link_text}
+        status={props.status}
       />
       <div className={styles["event-content__texts"]}>
         <ul>
