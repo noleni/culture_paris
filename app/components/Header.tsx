@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import LoginButton from "./LoginButton";
+import LoginButton from "./Login";
 import styles from "./header.module.scss";
 import { usePathname } from "next/navigation";
 import { AiOutlineSearch, AiOutlineMenu, AiOutlineClose } from "react-icons/ai";

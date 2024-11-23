@@ -18,6 +18,11 @@ const nextConfig: NextConfig = {
         hostname: "openagenda.com",
         pathname: "**",
       },
+      {
+        protocol: "https",
+        hostname: "developers.google.com",
+        pathname: "**",
+      },
     ],
   },
 

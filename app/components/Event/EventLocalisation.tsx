@@ -3,6 +3,8 @@ import EventMap from "../EventMap";
 import Rater from "../UI/Rater";
 import { CiEdit } from "react-icons/ci";
 import { CiHeart } from "react-icons/ci";
+import { CiFacebook } from "react-icons/ci";
+import Link from "next/link";
 import styles from "./eventLocalisation.module.scss";
 
 interface EventLocalisationProps {
@@ -57,6 +59,11 @@ const EventLocalisation: React.FC<EventLocalisationProps> = (props) => {
         </div>
         <div className={styles["event-localisation__section"]}>
           <p>{props.place.address_name}</p>
+          { props.contact_facebook &&
+            <Link href={props.contact_facebook}>
+              <CiFacebook />
+            </Link>
+           }
           <p>{props.place.address_street}</p>
           <p>{props.place.address_zipcode}</p>
         </div>
