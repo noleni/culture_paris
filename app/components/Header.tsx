@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import LoginButton from "./Login";
+import LoginButton from "./Login/Login";
 import styles from "./header.module.scss";
 import { usePathname } from "next/navigation";
 import { AiOutlineSearch, AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
@@ -20,10 +20,26 @@ const Navbar: React.FC = () => {
 
   const navigation = [
     { name: "Expos", href: "/expo", current: useFirstPathSegment() === "expo" },
-    { name: "Théâtre", href: "/theatre", current: useFirstPathSegment() === "theatre" },
-    { name: "Concert", href: "/concert", current: useFirstPathSegment() === "concert" },
-    { name: "Danse", href: "/danse", current: useFirstPathSegment() === "danse" },
-    { name: "Enfant", href: "/enfant", current: useFirstPathSegment() === "enfant" },
+    {
+      name: "Théâtre",
+      href: "/theatre",
+      current: useFirstPathSegment() === "theatre",
+    },
+    {
+      name: "Concert",
+      href: "/concert",
+      current: useFirstPathSegment() === "concert",
+    },
+    {
+      name: "Danse",
+      href: "/danse",
+      current: useFirstPathSegment() === "danse",
+    },
+    {
+      name: "Enfant",
+      href: "/enfant",
+      current: useFirstPathSegment() === "enfant",
+    },
   ];
 
   return (

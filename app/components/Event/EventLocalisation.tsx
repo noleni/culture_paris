@@ -8,6 +8,7 @@ import Link from "next/link";
 import styles from "./eventLocalisation.module.scss";
 
 interface EventLocalisationProps {
+  tags: { id: number; name: string }[];
   place: {
     address_name: string;
     address_street: string;
@@ -34,7 +35,17 @@ const EventLocalisation: React.FC<EventLocalisationProps> = (props) => {
   return (
     <aside className={styles["event-localisation"]}>
       <div className={styles["event-localisation__infos"]}>
-        <div className={`${styles["event-localisation__user-actions"]} ${styles["event-localisation__section"]}`}>
+        <ul className={styles["event-localisation__tags"]}>
+          <li className="tag">{props.status}</li>
+          {props.tags?.map((tag) => (
+            <li key={tag.id} className="tag">
+              {tag.name}
+            </li>
+          ))}
+        </ul>
+        <div
+          className={`${styles["event-localisation__user-actions"]} ${styles["event-localisation__section"]}`}
+        >
           <Rater rating={0} setRating={() => {}} />
           <button type="button">
             <CiEdit />
@@ -46,10 +57,9 @@ const EventLocalisation: React.FC<EventLocalisationProps> = (props) => {
           </button>
         </div>
         <div className={styles["event-localisation__section"]}>
-          <p>{props.status}</p>
           <p>
-            Du {new Date(props.date_start).toLocaleDateString()} {" "}
-            au {new Date(props.date_end).toLocaleDateString()}
+            Du {new Date(props.date_start).toLocaleDateString()} au{" "}
+            {new Date(props.date_end).toLocaleDateString()}
           </p>
           <p>{props.price_type}</p>
           <p>{props.audience}</p>
@@ -59,11 +69,11 @@ const EventLocalisation: React.FC<EventLocalisationProps> = (props) => {
         </div>
         <div className={styles["event-localisation__section"]}>
           <p>{props.place.address_name}</p>
-          { props.contact_facebook &&
+          {props.contact_facebook && (
             <Link href={props.contact_facebook}>
               <CiFacebook />
             </Link>
-           }
+          )}
           <p>{props.place.address_street}</p>
           <p>{props.place.address_zipcode}</p>
         </div>

@@ -8,7 +8,7 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = ({ children, isOpen, onClose }) => {
-  if (!isOpen) return null; // Rend la modale invisible si elle est fermée
+  if (!isOpen) return null;
 
   return (
     <div className={styles.modal}>

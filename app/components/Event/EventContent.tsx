@@ -3,7 +3,7 @@ import EventLocalisation from "./EventLocalisation";
 import styles from "./eventContent.module.scss";
 
 interface EventContentProps {
-  tags: { id: number; name: string }[];
+    tags: { id: number; name: string }[];
   place: {
     address_name: string;
     address_street: string;
@@ -32,6 +32,7 @@ const EventContent: React.FC<EventContentProps> = (props) => {
   return (
     <div className={styles["event-content"]}>
       <EventLocalisation
+        tags={props.tags}
         place={props.place}
         date_start={props.date_start}
         date_end={props.date_end}
@@ -48,13 +49,6 @@ const EventContent: React.FC<EventContentProps> = (props) => {
         status={props.status}
       />
       <div className={styles["event-content__texts"]}>
-        <ul>
-          {props.tags?.map((tag) => (
-            <li key={tag.id} className="tag">
-              {tag.name}
-            </li>
-          ))}
-        </ul>
         <p>{props.lead_text}</p>
 
         <h5>Description</h5>
