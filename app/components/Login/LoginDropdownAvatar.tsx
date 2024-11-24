@@ -2,6 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 import Avatar from "../UI/Avatar";
 import styles from "./loginDropdownAvatar.module.scss";
+import Link from "next/link";
 
 export interface LoginDropdownAvatarProps {
   user: {
@@ -49,7 +50,9 @@ const LoginDropdownAvatar: React.FC<LoginDropdownAvatarProps> = ({
           isDropdownOpen ? styles["opened"] : ""
         }`}
       >
-        <button onClick={() => console.log("Profil clicked")}>Profil</button>
+        <Link href="/profile">
+          Profil
+        </Link>
         <button onClick={() => console.log("Préférences clicked")}>
           Préférences
         </button>
