@@ -1,3 +1,4 @@
+
 import Modal from "../UI/Modal";
 import Image from "next/image";
 import { signIn } from "next-auth/react";
@@ -6,19 +7,17 @@ import styles from "./loginModal.module.scss";
 
 interface LoginModalProps {
   isModalOpen: boolean;
-  toggleModal: () => void;
+  setIsModalOpen: (value: boolean) => void;
 }
 
-const LoginModal: React.FC<LoginModalProps> = ({
-  isModalOpen,
-  toggleModal,
-}) => {
+const LoginModal: React.FC<LoginModalProps> = ({ isModalOpen, setIsModalOpen }) => {
 
-    const handleGoogleLogin = () => {
-      signIn("google");
-    };
+
+  const handleGoogleLogin = () => {
+    signIn("google");
+  };
   return (
-    <Modal isOpen={isModalOpen} onClose={toggleModal}>
+    <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
       <h2>Connexion</h2>
       <button onClick={handleGoogleLogin} className={styles["google-button"]}>
         <Image
@@ -39,6 +38,6 @@ const LoginModal: React.FC<LoginModalProps> = ({
       </form>
     </Modal>
   );
-}
+};
 
 export default LoginModal;

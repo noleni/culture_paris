@@ -1,6 +1,6 @@
 "use client";
 import { SetStateAction, useState} from "react";
-import EventMap from "../EventMap";
+import EventMap from "./EventMap";
 import Rater from "../UI/Rater";
 import LoginModal from "../Login/LoginModal";
 import { CiEdit } from "react-icons/ci";
@@ -51,7 +51,7 @@ const EventLocalisation: React.FC<EventLocalisationProps> = (props) => {
       {loginModalOpen && (
         <LoginModal
           isModalOpen={loginModalOpen}
-          toggleModal={() => setLoginModalOpen(!loginModalOpen)}
+          setIsModalOpen={setLoginModalOpen}
         />
       )}
       <aside className={styles["event-localisation"]}>

@@ -1,5 +1,5 @@
 import { getCurrentEvents } from "../../lib/events";
-import EventsList from "../components/EventsList";
+import EventsList from "../components/Event/EventsList";
 
 const DansePage = async () => {
   const currentDanse = await getCurrentEvents("Danse");

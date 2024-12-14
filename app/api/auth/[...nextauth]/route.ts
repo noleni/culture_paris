@@ -1,9 +1,30 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { prisma } from "@/lib/prisma"; // Importez votre instance Prisma
+import { prisma } from "@/lib/prisma"; // Votre instance Prisma
+import { generateUniqueSlug } from "@/lib/users";
+import { NextAuthOptions } from "next-auth";
+import { DefaultSession } from "next-auth";
+import { User as AdapterUser } from "next-auth/adapters";
 
-export const authOptions = {
+declare module "next-auth" {
+  interface Session {
+    user: {
+      id: string;
+      email: string;
+      name: string;
+      image: string;
+      slug: string | null; // Ajoutez 'slug' ici
+    } & DefaultSession["user"];
+  }
+
+  interface User extends AdapterUser {
+    slug: string | null; // Ajoutez 'slug' ici également
+  }
+}
+
+
+export const authOptions: NextAuthOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
@@ -12,10 +33,23 @@ export const authOptions = {
   ],
   adapter: PrismaAdapter(prisma),
   secret: process.env.NEXTAUTH_SECRET,
+  events: {
+    async createUser(message) {
+      const { email, name } = message.user;
+      if (email && name) {
+        await prisma.user.update({
+          where: { email },
+          data: {
+            slug: await generateUniqueSlug(name),
+          },
+        });
+      }
+    },
+  },
   callbacks: {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    async session({ session, user }: { session: any; user: any }) {
-      session.user.id = user.id; // Ajoutez l'ID de l'utilisateur à la session
+    async session({ session, user }) {
+      session.user.id = user.id;
+      session.user.slug = user.slug || null;
       return session;
     },
   },

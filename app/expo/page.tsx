@@ -1,5 +1,5 @@
 // app/expos/page.tsx
-import EventsList from "../components/EventsList";
+import EventsList from "../components/Event/EventsList";
 import { getCurrentEvents } from "../../lib/events";
 
 const ExposPage = async () => {

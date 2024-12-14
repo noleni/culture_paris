@@ -4,6 +4,18 @@ import { signOut, useSession } from "next-auth/react";
 import LoginModal from "./LoginModal";
 import LoginDropdownAvatar from "./LoginDropdownAvatar";
 
+declare module "next-auth" {
+  interface Session {
+    user: {
+      id: string;
+      name?: string;
+      email?: string;
+      image?: string;
+      slug?: string;
+    };
+  }
+}
+
 const Login = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { data: session } = useSession();
@@ -15,7 +27,7 @@ const Login = () => {
       {session &&
       session?.user &&
       session.user?.image &&
-      session.user?.image &&
+      session.user?.id &&
       session.user?.email ? (
         <LoginDropdownAvatar
           user={session.user as LoginDropdownAvatarProps["user"]}
@@ -28,7 +40,7 @@ const Login = () => {
           </button>
           <LoginModal
             isModalOpen={isModalOpen}
-            toggleModal={toggleModal}
+            setIsModalOpen={setIsModalOpen}
           />
         </>
       )}

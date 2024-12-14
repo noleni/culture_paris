@@ -9,6 +9,7 @@ export interface LoginDropdownAvatarProps {
     name: string;
     email: string;
     image: string;
+    slug: string;
   };
   logout: () => void;
 }
@@ -50,9 +51,7 @@ const LoginDropdownAvatar: React.FC<LoginDropdownAvatarProps> = ({
           isDropdownOpen ? styles["opened"] : ""
         }`}
       >
-        <Link href="/profile">
-          Profil
-        </Link>
+        <Link href={`/profile/${user.slug}`}>Profil</Link>
         <button onClick={() => console.log("Préférences clicked")}>
           Préférences
         </button>

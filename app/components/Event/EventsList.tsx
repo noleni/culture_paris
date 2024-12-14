@@ -1,6 +1,6 @@
 "use client";
-import Card from "./Card";
-import { EventWithRelations } from "../../lib/events";
+import Card from "../Card";
+import { EventWithRelations } from "../../../lib/events";
 
 type EventsListProps = {
   currentEvents: EventWithRelations[];

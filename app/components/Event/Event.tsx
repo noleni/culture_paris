@@ -45,11 +45,9 @@ const Event: React.FC<EventProps> = ({ event }) => {
     return { figures, extractedDescription };
   }
 
-  const { figures, extractedDescription } = extractFiguresAndText(
+  const { extractedDescription } = extractFiguresAndText(
     event.description
   );
-
-  console.log(event);
 
   return (
     <div>
