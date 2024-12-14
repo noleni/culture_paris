@@ -3,9 +3,9 @@ import EventsList from "../components/Event/EventsList";
 import { getCurrentEvents } from "@/lib/events";
 
 const TheatrePage = async () => {
-  const currentTheatre = await getCurrentEvents("Théâtre");
+  const { events, allTags } = await getCurrentEvents("Théâtre");
 
-  return <EventsList currentEvents={currentTheatre} tag="theatre" />;
+  return <EventsList currentEvents={events} allTags={allTags} tag="theatre" />;
 };
 
 export default TheatrePage;

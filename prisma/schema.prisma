@@ -110,7 +110,7 @@ model EventsData {
   access_link String
   access_link_text String
   tags       Tag[]        @relation("EventTags") // Relation avec le modèle Tag
-  placeId    Int?
-  place      PlacesData?  @relation("PlaceEvents", fields: [placeId], references: [id])
+  placeId    Int
+  place      PlacesData  @relation("PlaceEvents", fields: [placeId], references: [id])
   updatedAt  DateTime @updatedAt
 }

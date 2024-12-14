@@ -1,23 +1,52 @@
 "use client";
+import { useState } from "react";
 import Card from "../Card";
-import { EventWithRelations } from "../../../lib/events";
+import { Event, EventTag } from "../../types/eventsTypes";
+import EventFilters from "./EventFilters";
+
+import styles from "./events.module.scss"
 
 type EventsListProps = {
-  currentEvents: EventWithRelations[];
+  currentEvents: Event[];
+  allTags: EventTag[];
   tag: string;
 };
 
-const EventsList: React.FC<EventsListProps> = ({ currentEvents, tag }) => {
+const EventsList: React.FC<EventsListProps> = ({ currentEvents, allTags, tag }) => {
+  const [filteredEvents, setFilteredEvents] = useState<Event[]>(currentEvents);
+
+  const filterEvents = (filters: { tag: EventTag, dateStart: string | number | Date, dateEnd: string | number | Date, place: string}) => {
+    const filtered = currentEvents.filter((event) => {
+      let isValid = true;
+
+      if (filters.tag && (!event.tags || event.tags.indexOf(filters.tag) === -1)) {
+        isValid = false;
+      }
+
+      if (filters.dateStart && new Date(event.date_start) < new Date(filters.dateStart)) {
+        isValid = false;
+      }
+
+      if (filters.dateEnd && new Date(event.date_end) > new Date(filters.dateEnd)) {
+        isValid = false;
+      }
+
+      if (filters.place && event.place?.address_name.toLowerCase().indexOf(filters.place.toLowerCase()) === -1) {
+        isValid = false;
+      }
+
+      return isValid;
+    });
+
+    setFilteredEvents(filtered);
+  }
+
   return (
-    <div>
-      <div className="filters">
-        <button className="cta">Aujourd&apos;hui</button>
-        <button className="cta">Ce week-end</button>
-        <button className="cta">A venir</button>
-      </div>
-      <div className="grid">
-        {currentEvents.length > 0 ? (
-          currentEvents.map((event) => (
+    <div className={styles.events}>
+      <EventFilters filterEvents={filterEvents} allTags={allTags} />
+      <div className={styles.events__list + " grid"}>
+        {filteredEvents.length > 0 ? (
+          filteredEvents.map((event) => (
             <Card
               key={event.id}
               title={event.title}

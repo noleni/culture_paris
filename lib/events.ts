@@ -1,19 +1,23 @@
 import { prisma } from "./prisma";
-import { Prisma } from "@prisma/client";
-import type { EventsData as PrismaEventsData } from "@prisma/client";
+import { Event, EventTag } from "../app/types/eventsTypes";
 
-export interface EventsData extends PrismaEventsData {
-  status?: string;
-}
+// Utilitaire pour extraire tous les tags
+const getAllTags = (events: Event[]): EventTag[] => {
+  const allTags = events.flatMap((event) => event.tags || []);
+  const uniqueTagsMap = new Map<number, EventTag>();
 
-export type EventWithRelations = Prisma.EventsDataGetPayload<{
-  include: { tags: true; place: true };
-}>;
+  allTags.forEach((tag) => {
+    uniqueTagsMap.set(tag.id, tag);
+  });
 
+  return Array.from(uniqueTagsMap.values());
+};
+
+// Récupérer les événements actuels
 export async function getCurrentEvents(
   tag: string
-): Promise<EventWithRelations[]> {
-  // Récupérer tous les événements avec le tag "Expo"
+): Promise<{ events: Event[]; allTags: EventTag[] }> {
+  // Récupérer tous les événements avec le tag spécifié
   const events = await prisma.eventsData.findMany({
     where: {
       tags: {
@@ -26,32 +30,15 @@ export async function getCurrentEvents(
       place: true, // Inclure les informations sur le lieu
       tags: true, // Inclure les tags
     },
-    // retourner les propriétés nécessaires
   });
 
-  return events;
+  const allTags = getAllTags(events as Event[]); // Cast explicite vers Event[]
+
+  return { events: events as Event[], allTags };
 }
 
-export async function getToComeEvents(tag: string): Promise<EventsData[]> {
-  // Récupérer tous les événements avec le tag "Expo"
-
-  const events = await prisma.eventsData.findMany({
-    where: {
-      tags: {
-        some: {
-          name: tag,
-        },
-      },
-    },
-    include: {
-      place: true, // Inclure les informations sur le lieu
-    },
-  });
-
-  return events;
-}
-
-export async function getEventById(id: string): Promise<EventsData | null> {
+// Récupérer un événement par son ID
+export async function getEventById(id: string): Promise<Event | null> {
   const event = await prisma.eventsData.findUnique({
     where: {
       id: id,
@@ -61,19 +48,25 @@ export async function getEventById(id: string): Promise<EventsData | null> {
       tags: true,
     },
   });
-  let status;
-  if (event?.date_start && event?.date_end) {
+
+  if (!event) {
+    return null;
+  }
+
+  // Calculer le statut de l'événement
+  let status: string | undefined;
+  if (event.date_start && event.date_end) {
     const startDate = new Date(event.date_start);
     const endDate = new Date(event.date_end);
     const now = new Date();
     if (now > endDate) {
       status = "Passé";
-    } else if (now > startDate && now < endDate) {
+    } else if (now >= startDate && now <= endDate) {
       status = "En cours";
     } else {
       status = "À venir";
     }
-    (event as EventsData).status = status;
   }
-  return event;
+
+  return { ...event, status } as Event;
 }

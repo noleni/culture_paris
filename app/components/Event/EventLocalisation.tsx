@@ -1,5 +1,6 @@
 "use client";
 import { SetStateAction, useState} from "react";
+import type { Event } from "../../types/eventsTypes";
 import EventMap from "./EventMap";
 import Rater from "../UI/Rater";
 import LoginModal from "../Login/LoginModal";
@@ -11,30 +12,10 @@ import { useSession } from "next-auth/react";
 import styles from "./eventLocalisation.module.scss";
 
 interface EventLocalisationProps {
-  tags: { id: number; name: string }[];
-  place: {
-    address_name: string;
-    address_street: string;
-    address_zipcode: string;
-    latitude: number;
-    longitude: number;
-  };
-  date_start: string;
-  date_end: string;
-  audience: string;
-  contact_url: string;
-  contact_mail: string;
-  contact_facebook: string;
-  contact_twitter: string;
-  price_type: string;
-  price_detail: string;
-  access_type: string;
-  access_link: string;
-  access_link_text: string;
-  status?: string;
+  event: Event;
 }
 
-const EventLocalisation: React.FC<EventLocalisationProps> = (props) => {
+const EventLocalisation: React.FC<EventLocalisationProps> = ({event}) => {
   const { data: session } = useSession();
   const [rating, setRating] = useState(0);
   const [loginModalOpen, setLoginModalOpen] = useState(false);
@@ -57,8 +38,8 @@ const EventLocalisation: React.FC<EventLocalisationProps> = (props) => {
       <aside className={styles["event-localisation"]}>
         <div className={styles["event-localisation__infos"]}>
           <ul className={styles["event-localisation__tags"]}>
-            <li className="tag">{props.status}</li>
-            {props.tags?.map((tag) => (
+            {event?.status && <li className="tag">{event.status}</li>}
+            {event.tags?.map((tag) => (
               <li key={tag.id} className="tag">
                 {tag.name}
               </li>
@@ -79,28 +60,28 @@ const EventLocalisation: React.FC<EventLocalisationProps> = (props) => {
           </div>
           <div className={styles["event-localisation__section"]}>
             <p>
-              Du {new Date(props.date_start).toLocaleDateString()} au{" "}
-              {new Date(props.date_end).toLocaleDateString()}
+              Du {new Date(event.date_start).toLocaleDateString()} au{" "}
+              {new Date(event.date_end).toLocaleDateString()}
             </p>
-            <p>{props.price_type}</p>
-            <p>{props.audience}</p>
+            <p>{event.price_type}</p>
+            <p>{event.audience}</p>
             <button type="button" className="cta">
               Lien vers l&apos;événement
             </button>
           </div>
           <div className={styles["event-localisation__section"]}>
-            <p>{props.place.address_name}</p>
-            {props.contact_facebook && (
-              <Link href={props.contact_facebook}>
+            <p>{event.place.address_name}</p>
+            {event.contact_facebook && (
+              <Link href={event.contact_facebook}>
                 <CiFacebook />
               </Link>
             )}
-            <p>{props.place.address_street}</p>
-            <p>{props.place.address_zipcode}</p>
+            <p>{event.place.address_street}</p>
+            <p>{event.place.address_zipcode}</p>
           </div>
           <EventMap
-            latitude={props.place.latitude}
-            longitude={props.place.longitude}
+            latitude={event.place.latitude}
+            longitude={event.place.longitude}
           />
         </div>
       </aside>

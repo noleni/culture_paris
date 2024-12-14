@@ -1,5 +1,7 @@
 // styles/globals.scss
 
+@use "breaks.scss" as *;
+
 
 .theme--light {
   /* Thème clair (par défaut) */
@@ -94,7 +96,7 @@ ul {
 
 main {
   justify-content: center;
-  margin: 0 120px;
+  margin: 0 20px;
 }
 
 .container {
@@ -137,7 +139,6 @@ main {
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1rem;
   width: 100%;
-  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -148,4 +149,11 @@ main {
   border-radius: 8px;
   padding: 2px 6px;
   font-size: 0.8rem;
+}
+
+
+@media (min-width: $break-medium) {
+  main {
+    margin: 0 100px;
+  }
 }
