@@ -1,3 +1,4 @@
+// Updated Navbar component
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
@@ -20,103 +21,63 @@ const Navbar: React.FC = () => {
 
   const navigation = [
     { name: "Expos", href: "/expo", current: useFirstPathSegment() === "expo" },
-    {
-      name: "Théâtre",
-      href: "/theatre",
-      current: useFirstPathSegment() === "theatre",
-    },
-    {
-      name: "Concert",
-      href: "/concert",
-      current: useFirstPathSegment() === "concert",
-    },
-    {
-      name: "Danse",
-      href: "/danse",
-      current: useFirstPathSegment() === "danse",
-    },
-    {
-      name: "Enfant",
-      href: "/enfant",
-      current: useFirstPathSegment() === "enfant",
-    },
+    { name: "Théâtre", href: "/theatre", current: useFirstPathSegment() === "theatre" },
+    { name: "Concert", href: "/concert", current: useFirstPathSegment() === "concert" },
+    { name: "Danse", href: "/danse", current: useFirstPathSegment() === "danse" },
+    { name: "Enfant", href: "/enfant", current: useFirstPathSegment() === "enfant" },
   ];
 
   return (
     <header className={styles.header}>
-      <Link href="/" className={styles.logo}>
-        <Image
-          src="/icons/logo.webp"
-          alt="logo"
-          width={38}
-          height={38}
-          priority
-        />
-      </Link>
-      <nav className={styles.nav}>
-        <ul className={styles.ul}>
-          {navigation.map((item) => (
-            <li key={item.name} className={styles.li}>
-              <Link
-                href={item.href}
-                className={`${styles.link} ${
-                  item.current ? styles.active : ""
-                }`}
-              >
-                {item.name}
-              </Link>
-            </li>
-          ))}
-        </ul>
-        <div className={styles.search}>
-          <input
-            type="search"
-            placeholder="Rechercher..."
-            className={styles.input}
+      <div className={styles.container}>
+        <Link href="/" className={styles.logo}>
+          <Image
+            src="/icons/logo.webp"
+            alt="logo"
+            width={38}
+            height={38}
+            priority
           />
-          <button type="submit" className="cta">
-            <AiOutlineSearch />
-          </button>
-        </div>
-      </nav>
-      <div className="flex">
-        {/* <button type="button" className="cta">
-          Connexion
-        </button> */}
-        <LoginButton />
-      </div>
-
-      {/* <div className={styles.menu} onClick={toggleMobileMenu}>
-          {isMobileMenuOpen ? (
-            <AiOutlineClose size={24} />
-          ) : (
-            <>
-              <AiOutlineMenu size={24} />
-            </>
-          )}
-        </div> */}
-
-      {/* {isMobileMenuOpen && (
-          <div className={styles.mobileMenu}>
-            <ul className={styles.ul}>
-              {navigation.map((item) => (
-                <li key={item.name} className={styles.li}>
-                  <Link
-                    href={item.href}
-                    className={`${styles.link} ${
-                      item.current ? styles.active : ""
-                    }`}
-                  >
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            <button type="button" className={styles.cta}>
-              Connexion
+        </Link>
+        <nav className={`${styles.nav} ${isMobileMenuOpen ? styles.open : ""}`}>
+          <div className={styles.search}>
+            <input
+              type="search"
+              placeholder={"Rechercher..."}
+              className={styles.input}
+            />
+            <button type="submit" className={styles.cta}>
+              <AiOutlineSearch />
             </button>
           </div>
-        )} */}
+          <ul className={styles.ul}>
+            {navigation.map((item) => (
+              <li key={item.name} className={styles.li}>
+                <Link
+                  href={item.href}
+                  className={`${styles.link} ${
+                    item.current ? styles.active : ""
+                  }`}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {item.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <div className={styles.actions}>
+          {!isMobileMenuOpen && <LoginButton />}
+          <button
+            type="button"
+            className={styles.menuToggle}
+            onClick={toggleMobileMenu}
+            aria-label="Toggle mobile menu"
+          >
+            {isMobileMenuOpen ? <AiOutlineClose size={24} /> : <AiOutlineMenu size={24} />}
+          </button>
+        </div>
+      </div>
     </header>
   );
 };

@@ -43,25 +43,28 @@ const EventsList: React.FC<EventsListProps> = ({ currentEvents, allTags, tag }) 
 
   return (
     <div className={styles.events}>
-      <EventFilters filterEvents={filterEvents} allTags={allTags} />
-      <div className={styles.events__list + " grid"}>
-        {filteredEvents.length > 0 ? (
-          filteredEvents.map((event) => (
-            <Card
-              key={event.id}
-              title={event.title}
-              cover_url={event.cover_url}
-              cover_credit={event.cover_credit}
-              cover_alt={event.cover_alt}
-              address_name={event.place?.address_name || ""}
-              date_start={event.date_start}
-              date_end={event.date_end}
-              href={`/${tag.toLowerCase()}/${event.id}`}
-            />
-          ))
-        ) : (
-          <p>Aucun événement trouvé.</p>
-        )}
+      <div className={styles.events__banner}></div>
+      <div className={styles.events__content}>
+        <EventFilters filterEvents={filterEvents} allTags={allTags} />
+        <div className={styles.events__list + " grid"}>
+          {filteredEvents.length > 0 ? (
+            filteredEvents.map((event) => (
+              <Card
+                key={event.id}
+                title={event.title}
+                cover_url={event.cover_url}
+                cover_credit={event.cover_credit}
+                cover_alt={event.cover_alt}
+                address_name={event.place?.address_name || ""}
+                date_start={event.date_start}
+                date_end={event.date_end}
+                href={`/${tag.toLowerCase()}/${event.id}`}
+              />
+            ))
+          ) : (
+            <p>Aucun événement trouvé.</p>
+          )}
+        </div>
       </div>
     </div>
   );

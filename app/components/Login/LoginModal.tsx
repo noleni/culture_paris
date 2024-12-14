@@ -12,13 +12,11 @@ interface LoginModalProps {
 
 const LoginModal: React.FC<LoginModalProps> = ({ isModalOpen, setIsModalOpen }) => {
 
-
   const handleGoogleLogin = () => {
     signIn("google");
   };
   return (
     <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-      <h2>Connexion</h2>
       <button onClick={handleGoogleLogin} className={styles["google-button"]}>
         <Image
           src="https://developers.google.com/identity/images/g-logo.png"
@@ -28,8 +26,8 @@ const LoginModal: React.FC<LoginModalProps> = ({ isModalOpen, setIsModalOpen }) 
         />
         Se connecter avec Google
       </button>
-      <hr />
-      <form>
+      <form className={styles.form}>
+        <h5>Se connecter</h5>
         <label htmlFor="email">Email</label>
         <input type="email" id="email" required />
         <label htmlFor="password">Mot de passe</label>

@@ -14,3 +14,23 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   justify-self: center;
 }
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+
+  label {
+    font-size: 12px;
+  }
+
+  input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+
+
+}

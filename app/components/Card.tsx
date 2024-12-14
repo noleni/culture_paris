@@ -24,7 +24,7 @@ const Card: React.FC<CardProps> = (props) => {
         <IoMdHeartEmpty />
       </div>
       <div className={styles.card__title}>
-        <h4>{props.title}</h4>
+        <h5>{props.title}</h5>
       </div>
       <div>
         <div className={styles.card__image}>
@@ -39,13 +39,15 @@ const Card: React.FC<CardProps> = (props) => {
             />
           )}
         </div>
-        <div className="tag">
-          <p>{props.address_name}</p>
+        <div className={styles.card__info}>
+          <div className="tag">
+            <p>{props.address_name}</p>
+          </div>
+          <small>
+            {new Date(props.date_start).toLocaleDateString()} -{" "}
+            {new Date(props.date_end).toLocaleDateString()}
+          </small>
         </div>
-        <small>
-          {new Date(props.date_start).toLocaleDateString()} -{" "}
-          {new Date(props.date_end).toLocaleDateString()}
-        </small>
       </div>
     </Link>
   );

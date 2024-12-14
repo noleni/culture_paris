@@ -1,34 +1,58 @@
 @use "../../styles/breaks.scss";
 
 .events {
-  .events__filters {
-    margin: 0 20px 20px 0;
-    .events__filters__title {
+  .events__banner {
+    background-color: var(--primary50);
+    color: var(--white);
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+    h1 {
       font-size: 1.5rem;
-      font-weight: bold;
       margin-bottom: 10px;
     }
+    p {
+      font-size: 1rem;
+    }
+  }
 
-    .events__filter {
-      margin-bottom: 10px;
-      .events__filters__item__title {
-        font-size: 1.2rem;
+  .events__content {
+    .events__filters {
+      margin: 0 20px 20px 0;
+      .events__filters__title {
         font-weight: bold;
-        margin-bottom: 5px;
+        margin-bottom: 10px;
       }
 
-      ul {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 5px;
-        .events__filters__item__list__item {
-          background-color: var(--surface10);
-          border-radius: 5px;
-          padding: 5px 10px;
-          cursor: pointer;
-          transition: background-color 0.3s;
-          &:hover {
-            background-color: var(--surface20);
+      .events__filter {
+        margin-bottom: 10px;
+        .events__filters__item__title {
+          font-weight: bold;
+          margin-bottom: 5px;
+        }
+
+        ul {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 5px;
+          li {
+            border-radius: 5px;
+            border: 1px solid var(--primary50);
+            padding: 5px 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+
+            button {
+              background: none;
+              border: none;
+              color: inherit;
+              font: inherit;
+              cursor: pointer;
+              outline: inherit;
+            }
+            &:hover {
+              background-color: var(--primary50);
+            }
           }
         }
       }
@@ -39,16 +63,19 @@
   }
 }
 
-
 @media (min-width: breaks.$break-medium) {
   .events {
-    display: flex;
-    .events__filters {
-      width: 300px;
-    }
+    .events__content {
+      display: flex;
+      .events__filters {
+        width: 300px;
+        position: sticky;
+        top: 0;
+      }
 
-    .events__list {
-      flex: 1;
+      .events__list {
+        flex: 1;
+      }
     }
   }
 }

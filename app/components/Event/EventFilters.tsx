@@ -32,10 +32,9 @@ const EventFilters: React.FC<{
         <ul>
           {allTags &&
             allTags.map((tag) => (
-              <li key={tag.id} className="tag">
+              <li key={tag.id}>
                 <button
                   type="button"
-                  className="tag"
                   onClick={() =>
                     filterEvents({
                       tag: tag,
