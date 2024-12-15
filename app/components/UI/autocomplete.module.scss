@@ -10,8 +10,9 @@
   .autocomplete__input {
     width: 100%;
     padding: 6px;
-    border: 1px solid #ccc;
+    border: none;
     border-radius: 5px;
+    background-color: var(--surface20);
   }
 
   .autocomplete__clearButton {
