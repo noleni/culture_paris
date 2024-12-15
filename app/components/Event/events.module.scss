@@ -18,20 +18,23 @@
 
   .events__content {
     .events__filters {
-      margin: 0 20px 20px 0;
+      margin: 0 60px 20px 0;
+      padding: 12px;
+      background-color: var(--surface0);
+      border-radius: 5px;
       .events__filters__title {
-        font-weight: bold;
         margin-bottom: 10px;
       }
 
       .events__filter {
         margin-bottom: 10px;
-        .events__filters__item__title {
+        h5 {
           font-weight: bold;
-          margin-bottom: 5px;
+          margin-bottom: 2px;
+          color: var(----base0);
         }
 
-        ul {
+        .events__tags {
           display: flex;
           flex-wrap: wrap;
           gap: 5px;
@@ -51,6 +54,10 @@
               outline: inherit;
             }
             &:hover {
+              background-color: var(--primary50);
+            }
+
+            &.active {
               background-color: var(--primary50);
             }
           }

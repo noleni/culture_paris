@@ -21,13 +21,15 @@
   --surface40: #e9e9e9;
   --surface50: #e3e3e3;
 
-  --primary0: #0ec788;
-  --primary0rgb: 14, 199, 136;
-  --primary10: #47ce95;
-  --primary20: #66d5a2;
-  --primary30: #80dbaf;
-  --primary40: #97e1bc;
-  --primary50: #ade8c9;
+--primary0: #32907d;
+--primary0rgb: 50, 144, 125;
+--primary10: #3da08b;
+--primary20: #48b098;
+--primary30: #53c0a6;
+--primary40: #5ecfb4;
+--primary50: #69dfc1;
+
+
 }
 
 .theme--dark {
@@ -46,14 +48,15 @@
   --surface40: #717171;
   --surface50: #8b8b8b;
 
-  --primary0: #0ec788;
-  --primary0rgb: 14, 199, 136;
-  --primary10: #47ce95;
-  --primary20: #66d5a2;
-  --primary30: #80dbaf;
-  --primary40: #97e1bc;
-  --primary50: #ade8c9;
+--primary0: #32907d;
+--primary0rgb: 50, 144, 125;
+--primary10: #3da08b;
+--primary20: #48b098;
+--primary30: #53c0a6;
+--primary40: #5ecfb4;
+--primary50: #69dfc1;
 }
+
 
 :root {
   --font-geist-sans: 'Geist Sans', sans-serif;
@@ -78,7 +81,8 @@ body {
   // font-family: "inter", sans-serif;
   line-height: 1.6;
   color: var(--base30);
-  background-color: var(--surface30);
+  background-color: var(--surface10);
+  font-size: 13px;
 }
 
 h1, h2 {

@@ -3,9 +3,19 @@ import { getCurrentEvents } from "../../lib/events";
 import EventsList from "../components/Event/EventsList";
 
 const ConcertsPage = async () => {
-  const {events, allTags} = await getCurrentEvents("Concert");
+  const { events, allTags, allPlaces, allZipcodes } = await getCurrentEvents(
+    "Concert"
+  );
 
-  return <EventsList currentEvents={events} allTags={allTags} tag="concert" />;
+  return (
+    <EventsList
+      currentEvents={events}
+      allTags={allTags}
+      allPlaces={allPlaces}
+      allZipcodes={allZipcodes}
+      tag="concert"
+    />
+  );
 };
 
 export default ConcertsPage;

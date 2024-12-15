@@ -1,7 +1,7 @@
 @use "../styles/index" as *;
 
 .card {
-  background-color: var(--surface10);
+  background-color: var(--surface0);
   color: var(--base20);
   border-radius: 6px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -10,7 +10,7 @@
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  text-align: center;
+  text-align: left;
 
   &:hover {
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
@@ -20,8 +20,7 @@
     display: flex;
     justify-content: flex-end;
     gap: 8px;
-    padding: 6px;
-
+    padding: 0 12px 12px 0;
     svg {
       width: 20px;
       height: 20px;
@@ -41,37 +40,44 @@
     aspect-ratio: 16 / 9; /* Maintient un ratio 16:9 */
     background-color: var(--surface20);
     overflow: hidden;
+
+    .card__info {
+      .card__tag {
+        position: absolute;
+        top: 6px;
+        left: 6px;
+        color: var(--base50);
+        background-color: var(--base0);
+        padding: 2px 6px;
+        border-radius: 12px;
+      }
+
+      small {
+        position: absolute;
+        font-size: 0.8rem;
+        color: var(--base30);
+        bottom: 6px;
+        right: 6px;
+        color: var(--base50);
+        background-color: var(--primary0);
+        padding: 0 6px;
+      }
+    }
   }
 
   .card__title {
-    padding: 6px;
-    background-color: var(--surface0);
+    padding: 12px;
+    max-width: 300px;
 
     h5 {
-      line-height: 1.4;
+      line-height: 1.6;
+      font-size: 15px;
       color: var(--base10);
       display: -webkit-box;
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 2;
       overflow: hidden;
       text-overflow: ellipsis;
-    }
-  }
-
-  .card__info {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 6px;
-    .tag {
-      margin: 8px 0;
-      font-size: 0.9rem;
-      color: var(--base40);
-    }
-
-    small {
-      font-size: 0.8rem;
-      color: var(--base30);
     }
   }
 }

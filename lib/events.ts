@@ -10,13 +10,29 @@ const getAllTags = (events: Event[]): EventTag[] => {
     uniqueTagsMap.set(tag.id, tag);
   });
 
-  return Array.from(uniqueTagsMap.values());
+  return Array.from(uniqueTagsMap.values()).sort((a, b) => a.name.localeCompare(b.name));
+};
+
+const getAllPlaces = (
+  events: Event[]
+): { allPlaces: string[]; allZipcodes: string[] } => {
+  const allPlaces = events.flatMap((event) => event.place?.address_name || "");
+  const uniquePlaces = new Set(allPlaces);
+  const allZipcodes = events.flatMap(
+    (event) => event.place?.address_zipcode || ""
+  );
+  const uniqueZipcodes = new Set(allZipcodes);
+
+  return {
+    allPlaces: Array.from(uniquePlaces).sort(),
+    allZipcodes: Array.from(uniqueZipcodes).sort(),
+  };
 };
 
 // Récupérer les événements actuels
 export async function getCurrentEvents(
   tag: string
-): Promise<{ events: Event[]; allTags: EventTag[] }> {
+): Promise<{ events: Event[]; allTags: EventTag[], allPlaces: string[], allZipcodes: string[] }> {
   // Récupérer tous les événements avec le tag spécifié
   const events = await prisma.eventsData.findMany({
     where: {
@@ -32,9 +48,16 @@ export async function getCurrentEvents(
     },
   });
 
-  const allTags = getAllTags(events as Event[]); // Cast explicite vers Event[]
+  events.map((event) => {
+    event.date_start = new Date(event.date_start).toLocaleDateString("en-GB");
+    event.date_end = new Date(event.date_end).toLocaleDateString("en-GB");
+    return event;
+  });
 
-  return { events: events as Event[], allTags };
+  const allTags = getAllTags(events as Event[]); // Cast explicite vers Event[]
+  const {allPlaces, allZipcodes} = getAllPlaces(events as Event[]);
+
+  return { events: events as Event[], allTags, allPlaces, allZipcodes };
 }
 
 // Récupérer un événement par son ID
