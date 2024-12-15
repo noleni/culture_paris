@@ -1,9 +1,11 @@
 // app/theatre/page.tsx
-import EventsList from "../components/Event/EventsList";
+import EventsList from "../components/Event/Events";
 import { getCurrentEvents } from "@/lib/events";
 
 const TheatrePage = async () => {
-  const { events, allTags, allPlaces, allZipcodes } = await getCurrentEvents("Théâtre");
+  const { events, allTags, allPlaces, allZipcodes } = await getCurrentEvents(
+    "Théâtre"
+  );
 
   return (
     <EventsList

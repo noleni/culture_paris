@@ -2,10 +2,8 @@
 
 .events {
   .events__banner {
-    background-color: var(--primary50);
     color: var(--white);
-    padding: 20px;
-    text-align: center;
+    text-align: right;
     margin-bottom: 20px;
     h1 {
       font-size: 1.5rem;
@@ -18,8 +16,9 @@
 
   .events__content {
     .events__filters {
+      height: fit-content;
       margin: 0 60px 20px 0;
-      padding: 12px;
+      padding: 18px;
       background-color: var(--surface0);
       border-radius: 5px;
       .events__filters__title {
@@ -77,11 +76,40 @@
       .events__filters {
         width: 300px;
         position: sticky;
-        top: 0;
+        top: 20px;
       }
 
       .events__list {
         flex: 1;
+      }
+
+      .events__map {
+        flex: 1;
+
+        .tooltip {
+          background-color: var(--surface0);
+          color: var(--white);
+          padding: 10px;
+          border-radius: 8px;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+          width: 250px;
+          line-height: 1.4;
+          text-align: center;
+
+          .tooltip-content {
+            .tooltip-title {
+              font-weight: bold;
+              margin-bottom: 5px;
+              white-space: normal;
+              word-wrap: break-word;
+            }
+
+            .tooltip-address {
+              white-space: normal;
+              word-wrap: break-word;
+            }
+          }
+        }
       }
     }
   }

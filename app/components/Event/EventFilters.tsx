@@ -49,10 +49,28 @@ const handleChange = (value: string, field: "place" | "zipcode" | "dateStart" | 
   });
 };
 
-
-
   return (
     <div className={styles["events__filters"]}>
+      <button
+        type="button"
+        className="cta"
+        onClick={() => {
+          setPlace("");
+          setZipcode("");
+          setDateStart("");
+          setDateEnd("");
+          setTagName("");
+          filterEvents({
+            tag: "",
+            dateStart: "",
+            dateEnd: "",
+            place: "",
+            zipcode: "",
+          });
+        }}
+      >
+        Réinitialiser les filtres
+      </button>
       <div className={styles["events__filter"]}>
         <h5>Lieu</h5>
         <CustomAutocomplete

@@ -80,8 +80,7 @@ const EventLocalisation: React.FC<EventLocalisationProps> = ({event}) => {
             <p>{event.place.address_zipcode}</p>
           </div>
           <EventMap
-            latitude={event.place.latitude}
-            longitude={event.place.longitude}
+            events={event ? [event] : []}
           />
         </div>
       </aside>
