@@ -1,5 +1,5 @@
 "use client";
-import { MapContainer, TileLayer, Marker, Tooltip } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup} from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import type { Event } from "../../types/eventsTypes";
@@ -14,23 +14,23 @@ interface EventMapProps {
   tag?: string;
 }
 
+
 const customIcon = new L.Icon({
   iconUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png",
   iconRetinaUrl:
     "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon-2x.png",
-  shadowUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png",
+  // shadowUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png",
   iconSize: [25, 41],
   iconAnchor: [12, 41],
   popupAnchor: [1, -34],
-  shadowSize: [41, 41],
 });
 
 const EventMap: React.FC<EventMapProps> = ({ events, tag }) => {
   if (!events.length) return null; // Pas d'événements, pas de carte
 
   const defaultCenter = {
-    latitude: events[0].place.latitude,
-    longitude: events[0].place.longitude,
+    latitude: 48.8581050182032,
+    longitude: 2.36229800729188,
   };
 
   console.log("events", events);
@@ -53,16 +53,13 @@ const EventMap: React.FC<EventMapProps> = ({ events, tag }) => {
           icon={customIcon}
         >
           {tag && (
-            <Tooltip
-              direction="auto" // Permet de choisir automatiquement la meilleure direction
-              className={styles.tooltip}
-              interactive={true} // Rendre interactif pour éviter qu'il disparaisse sous la souris
-              permanent={false}
-              offset={[0, -30]}
-              eventHandlers={{
-                click: (e) => e.originalEvent.stopPropagation(), // Empêche la propagation des clics
-                mouseover: (e) => e.originalEvent.stopPropagation(), // Empêche la fermeture sur hover
-              }}
+            <Popup
+              className={styles.tooltip} // Utilise le même style que pour Tooltip
+              closeButton={false} // Désactive le bouton de fermeture
+              closeOnClick={true}
+              autoPan={true} // Active le déplacement automatique
+              autoPanPadding={[10, 50]} // Ajoute une marge pour éviter que le popup touche le bord
+              autoPanPaddingTopLeft={[0, 50]}
             >
               <Link
                 className={styles["tooltip-content"]}
@@ -89,7 +86,7 @@ const EventMap: React.FC<EventMapProps> = ({ events, tag }) => {
                   {event.place.address_name}
                 </p>
               </Link>
-            </Tooltip>
+            </Popup>
           )}
         </Marker>
       ))}
