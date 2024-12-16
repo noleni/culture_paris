@@ -1,6 +1,8 @@
-import EventCover from "./EventCover";
+import Image from "next/image";
 import EventContent from "./EventContent";
 import type { Event } from "../../types/eventsTypes";
+
+import styles from "./eventCover.module.scss";
 
 interface EventProps {
   event: Event;
@@ -23,16 +25,16 @@ const Event: React.FC<EventProps> = ({ event }) => {
 
   return (
     <div>
-      <EventCover
-        cover_url={event.cover_url}
-        cover_alt={event.cover_alt}
-        cover_credit={event.cover_credit}
-        title={event.title}
-      />
-      <EventContent
-        event={event}
-        extractedDescription={extractedDescription}
-      />
+      <div className={styles.cover}>
+        {event.cover_url && (
+          <>
+            <Image src={event.cover_url} alt={event.cover_alt} priority fill />
+            <small>© {event.cover_credit}</small>
+          </>
+        )}
+      </div>
+      <h1>{event.title}</h1>
+      <EventContent event={event} extractedDescription={extractedDescription} />
       {/* {figures.length > 0 && (
           <Slider {...sliderSettings}>
             {figures.map((figure, index) => (

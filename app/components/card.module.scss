@@ -46,20 +46,18 @@
         position: absolute;
         top: 6px;
         left: 6px;
-        color: var(--base50);
-        background-color: var(--base0);
+        background-color: var(--surface10);
         padding: 2px 6px;
         border-radius: 12px;
       }
 
       small {
         position: absolute;
-        font-size: 0.8rem;
         color: var(--base30);
         bottom: 6px;
         right: 6px;
         color: var(--base50);
-        background-color: var(--primary0);
+        background-color: var(--surface10);
         padding: 0 6px;
       }
     }
@@ -71,7 +69,6 @@
 
     h5 {
       line-height: 1.6;
-      font-size: 15px;
       color: var(--base10);
       display: -webkit-box;
       -webkit-box-orient: vertical;

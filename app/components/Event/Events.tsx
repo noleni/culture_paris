@@ -86,7 +86,7 @@ const Events: React.FC<EventsListProps> = ({
     <div className={styles.events}>
       <div className={styles.events__banner}>
         <button
-          className={styles.events__toggle}
+          className={styles.events__toggle + " cta"}
           onClick={() => setIsMapVisible(!isMapVisible)}
         >
           {isMapVisible ? <CiGrid41 /> : <CiMap />}
