@@ -19,21 +19,22 @@ const Event: React.FC<EventProps> = ({ event }) => {
     return { figures, extractedDescription };
   }
 
-  const { extractedDescription } = extractFiguresAndText(
-    event.description
-  );
+  const { extractedDescription } = extractFiguresAndText(event.description);
 
   return (
-    <div>
+    <div className={styles.event}>
       <div className={styles.cover}>
         {event.cover_url && (
-          <>
+          <div className={styles.cover_image}>
+            <div className={styles.cover_title}>
+              <h1>{event.title}</h1>
+            </div>
             <Image src={event.cover_url} alt={event.cover_alt} priority fill />
+
             <small>© {event.cover_credit}</small>
-          </>
+          </div>
         )}
       </div>
-      <h1>{event.title}</h1>
       <EventContent event={event} extractedDescription={extractedDescription} />
       {/* {figures.length > 0 && (
           <Slider {...sliderSettings}>
