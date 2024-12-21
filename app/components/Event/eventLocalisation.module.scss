@@ -3,19 +3,12 @@
   .event-localisation__infos {
     margin-right: 2rem;
 
-    .event-localisation__tags {
-      display: flex;
-      gap: 0.5rem;
-      margin-bottom: 1rem;
-    }
     .event-localisation__section {
       border-top: 1px solid var(--base0);
       padding-top: 0.5rem;
       margin-top: 1rem;
     }
-    p {
-      font-size: smaller;
-    }
+
     .event-localisation__user-actions {
       display: flex;
       flex-direction: column;

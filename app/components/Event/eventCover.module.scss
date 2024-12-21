@@ -30,18 +30,44 @@
           /* Dégradé progressif */ rgba(0, 0, 0, 0.9) 100%
             /* Plus sombre en bas */
         );
-        z-index: 1; /* Assurez-vous qu'il est derrière le contenu */
+        z-index: 1;
       }
 
-      .cover_title {
+      .cover_infos {
         position: absolute;
+        z-index: 2; /* Par-dessus l'overlay */
         top: 30%;
         left: 2.5rem;
         z-index: 2; /* Par-dessus l'overlay */
         max-width: 800px;
-        h1 {
-          color: white;
-          text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+        .cover_tags {
+          display: flex;
+          gap: 0.5rem;
+          margin-bottom: 1rem;
+          z-index: 2; /* Par-dessus l'overlay */
+        }
+
+        .cover_title {
+          h1 {
+            color: white;
+            text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+          }
+        }
+      }
+
+      .cover_scrolldown {
+        position: absolute;
+        font-size: 3rem;
+        bottom: 6rem;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 2; /* Par-dessus l'overlay */
+        color: white;
+        cursor: pointer;
+        transition: all 0.3s;
+
+        &:hover {
+          transform: translateX(-50%) scale(1.1);
         }
       }
 
@@ -64,10 +90,6 @@
       line-height: 1.2;
       background-color: var(--surface0);
       padding: 1rem 1.5rem;
-
-      h2 {
-        font-size: 1.6rem;
-      }
 
       .avg-rating {
         width: fit-content;

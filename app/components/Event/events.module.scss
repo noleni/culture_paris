@@ -4,7 +4,7 @@
   .events__banner {
     color: var(--white);
     text-align: right;
-    margin: 1rem;
+    padding: 68px 0 12px 0;
     h1 {
       margin-bottom: 10px;
     }
@@ -33,7 +33,7 @@
           li {
             border-radius: 5px;
             border: 1px solid var(--primary50);
-            padding: 5px 10px;
+            padding: 2px 4px;
             cursor: pointer;
             transition: background-color 0.3s;
 
@@ -41,9 +41,8 @@
               background: none;
               border: none;
               color: inherit;
-              font: inherit;
               cursor: pointer;
-              outline: inherit;
+
             }
             &:hover {
               background-color: var(--primary50);
@@ -56,9 +55,6 @@
         }
       }
     }
-  }
-
-  .events__list {
   }
 }
 

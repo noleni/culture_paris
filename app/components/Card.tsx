@@ -31,17 +31,14 @@ const Card: React.FC<CardProps> = (props) => {
           />
         )}
         <div className={styles.card__info}>
-          <div className={styles.card__tag}>
-            <p>{props.address_name}</p>
-          </div>
-          <small>
-            du {props.date_start} {" "}
-            au {props.date_end}
+            <small className={styles.card__tag}>{props.address_name}</small>
+          <small className={styles.card__date}>
+            du {props.date_start} au {props.date_end}
           </small>
         </div>
       </div>
       <div className={styles.card__title}>
-        <h5>{props.title}</h5>
+        <h5 className="bold">{props.title}</h5>
       </div>
       <div className={styles.card__icons}>
         <IoMdStarOutline />

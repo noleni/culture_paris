@@ -37,14 +37,7 @@ const EventLocalisation: React.FC<EventLocalisationProps> = ({event}) => {
       )}
       <aside className={styles["event-localisation"]}>
         <div className={styles["event-localisation__infos"]}>
-          <ul className={styles["event-localisation__tags"]}>
-            {event?.status && <li className="tag">{event.status}</li>}
-            {event.tags?.map((tag) => (
-              <li key={tag.id} className="tag">
-                {tag.name}
-              </li>
-            ))}
-          </ul>
+ 
           <div
             className={`${styles["event-localisation__user-actions"]} ${styles["event-localisation__section"]}`}
           >

@@ -1,6 +1,12 @@
 @use "../styles/breaks.scss";
 
 .header {
+  position: absolute;
+  top: 6px;
+  left: 12px;
+  width: calc(100% - 24px);
+  opacity: 0.9;
+  z-index: 1000;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -8,7 +14,6 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   background-color: var(--surface0);
   border-radius: 6px;
-  margin: 6px;
 
   .container {
     display: flex;
@@ -81,7 +86,6 @@
         .link {
           text-decoration: none;
           color: var(--base10);
-          font-size: 1.2rem;
           transition: color 0.2s;
 
           &.active {
@@ -135,11 +139,6 @@
       .ul {
         flex-direction: row;
 
-        .li {
-          .link {
-            font-size: 1rem;
-          }
-        }
       }
     }
 

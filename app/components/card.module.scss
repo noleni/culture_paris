@@ -46,12 +46,13 @@
         position: absolute;
         top: 6px;
         left: 6px;
-        background-color: var(--surface10);
+        background-color: var(--primary0);
+        color: var(--primary50);
         padding: 2px 6px;
         border-radius: 12px;
       }
 
-      small {
+      .card__date {
         position: absolute;
         color: var(--base30);
         bottom: 6px;
