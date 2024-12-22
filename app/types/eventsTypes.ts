@@ -22,8 +22,8 @@ export interface Event {
   url: string;
   lead_text: string;
   description: string;
-  date_start: string;
-  date_end: string;
+  date_start: Date;
+  date_end: Date;
   date_description: string;
   cover_url: string;
   cover_alt: string;
@@ -43,4 +43,5 @@ export interface Event {
   status?: string;
   place: EventPlace;
   tags: EventTag[];
+  averageRating?: number;
 }

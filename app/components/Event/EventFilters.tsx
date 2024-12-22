@@ -1,6 +1,8 @@
 "use client";
 import { useState } from "react";
 import { EventTag } from "../../types/eventsTypes";
+import { HiChevronDoubleLeft } from "react-icons/hi2";
+import { HiChevronDoubleRight } from "react-icons/hi2";
 import CustomAutocomplete from "../UI/Autocomplete";
 import styles from "./events.module.scss";
 
@@ -21,6 +23,7 @@ const EventFilters: React.FC<{
   const [dateStart, setDateStart] = useState("");
   const [dateEnd, setDateEnd] = useState("");
   const [tagName, setTagName] = useState("");
+  const [showFilters, setShowFilters] = useState(true);
 
 const handleChange = (value: string, field: "place" | "zipcode" | "dateStart" | "dateEnd" | "tag") => {
   const updatedFilters = { place, zipcode, dateStart, dateEnd, tag: "" };
@@ -50,67 +53,89 @@ const handleChange = (value: string, field: "place" | "zipcode" | "dateStart" | 
 };
 
   return (
-    <div className={styles["events__filters"]}>
-      <button
-        type="button"
-        className="cta"
-        onClick={() => {
-          setPlace("");
-          setZipcode("");
-          setDateStart("");
-          setDateEnd("");
-          setTagName("");
-          filterEvents({
-            tag: "",
-            dateStart: "",
-            dateEnd: "",
-            place: "",
-            zipcode: "",
-          });
-        }}
-      >
-        Réinitialiser les filtres
-      </button>
-      <div className={styles["events__filter"]}>
-        <h5>Lieu</h5>
-        <CustomAutocomplete
-          options={allPlaces}
-          value={place}
-          onChange={(newValue) => handleChange(newValue, "place")}
-          placeholder="Tous les lieux"
-        />
-      </div>
+    <div
+      className={`${styles.events_filters} ${
+        showFilters
+          ? styles["events_filters--show"]
+          : styles["events_filters--hide"]
+      }`}
+    >
+      {showFilters ? (
+        <>
+          <HiChevronDoubleLeft
+            className={styles["events__filters__toggle"]}
+            onClick={() => setShowFilters(false)}
+          />
+          <div className={styles["events__filter"]}>
+            <h5>Lieu</h5>
+            <CustomAutocomplete
+              options={allPlaces}
+              value={place}
+              onChange={(newValue) => handleChange(newValue, "place")}
+              placeholder="Tous les lieux"
+            />
+          </div>
 
-      <div className={styles["events__filter"]}>
-        <h5>Arrondissements</h5>
-        <CustomAutocomplete
-          options={allZipcodes}
-          value={zipcode}
-          onChange={(newValue) => handleChange(newValue, "zipcode")}
-          placeholder="Tous les arrondissements"
+          <div className={styles["events__filter"]}>
+            <h5>Arrondissements</h5>
+            <CustomAutocomplete
+              options={allZipcodes}
+              value={zipcode}
+              onChange={(newValue) => handleChange(newValue, "zipcode")}
+              placeholder="Tous les arrondissements"
+            />
+          </div>
+          <div className={styles["events__filter"]}>
+            <h5>Date</h5>
+            <input type="date" id="start" name="start" />
+            <input type="date" id="end" name="end" />
+          </div>
+          <div className={styles["events__filter"]}>
+            <h5>Catégories</h5>
+            <ul className={styles["events__tags"]}>
+              {allTags &&
+                allTags.map((tag) => (
+                  <li
+                    key={tag.id}
+                    className={tag.name === tagName ? styles["active"] : ""}
+                  >
+                    <button
+                      type="button"
+                      onClick={() => handleChange(tag.name, "tag")}
+                    >
+                      {tag.name}
+                    </button>
+                  </li>
+                ))}
+            </ul>
+          </div>
+          <button
+            type="button"
+            className="cta"
+            onClick={() => {
+              setPlace("");
+              setZipcode("");
+              setDateStart("");
+              setDateEnd("");
+              setTagName("");
+              filterEvents({
+                tag: "",
+                dateStart: "",
+                dateEnd: "",
+                place: "",
+                zipcode: "",
+              });
+            }}
+          >
+            Réinitialiser les filtres
+          </button>
+        </>
+      ) : (
+        <HiChevronDoubleRight
+          className={styles["events__filters__toggle"]}
+          onClick={() => setShowFilters(true)}
         />
-      </div>
-      <div className={styles["events__filter"]}>
-        <h5>Date</h5>
-        <input type="date" id="start" name="start" />
-        <input type="date" id="end" name="end" />
-      </div>
-      <div className={styles["events__filter"]}>
-        <h5>Catégories</h5>
-        <ul className={styles["events__tags"]}>
-          {allTags &&
-            allTags.map((tag) => (
-              <li key={tag.id} className={tag.name === tagName ? styles["active"] : ""}>
-                <button
-                  type="button"
-                  onClick={() => handleChange(tag.name, "tag")}
-                >
-                  {tag.name}
-                </button>
-              </li>
-            ))}
-        </ul>
-      </div>
+      )}
     </div>
   );
 };

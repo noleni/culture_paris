@@ -1,4 +1,4 @@
-import { getCurrentEvents } from "../../lib/events";
+import { getCurrentEvents } from "../../lib/events/events";
 import EventsList from "../components/Event/Events";
 
 const DansePage = async () => {

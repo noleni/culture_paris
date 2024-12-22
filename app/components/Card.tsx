@@ -17,6 +17,7 @@ interface CardProps {
 }
 
 const Card: React.FC<CardProps> = (props) => {
+
   return (
     <Link className={styles.card} href={props.href}>
       <div className={styles.card__image}>

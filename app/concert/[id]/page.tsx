@@ -1,4 +1,4 @@
-import { getEventById } from "@/lib/events";
+import { getEventById } from "@/lib/events/events";
 import Event from "../../components/Event/Event";
 
 interface ConcertPageProps {
