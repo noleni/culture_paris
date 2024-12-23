@@ -13,7 +13,7 @@ export async function getUserById(slug: string): Promise<Users | null> {
 
   const user = await prisma.user.findUnique({
     where: {
-      slug: slug, // Assurez-vous que slug est défini ici
+      slug,
     },
   });
 

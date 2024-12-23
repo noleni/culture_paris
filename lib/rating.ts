@@ -14,12 +14,12 @@ export const addOrUpdateRating = async (
       },
     },
     update: {
-      value: value,
+      value,
     },
     create: {
-      eventId: eventId,
-      userId: userId,
-      value: value,
+      eventId,
+      userId,
+      value,
     },
   });
 };
@@ -27,10 +27,25 @@ export const addOrUpdateRating = async (
 export const getRating = async ( eventId: string, userId: string): Promise<number | null> => {
   const rating = await prisma.rating.findFirst({
     where: {
-      eventId: eventId,
-      userId: userId,
+      eventId,
+      userId,
     },
   });
 
   return rating?.value || null;
+}
+
+export const getAverageRating = async (eventId: string): Promise<number | null> => {
+  const ratings = await prisma.rating.findMany({
+    where: {
+      eventId,
+    },
+  });
+
+  if (ratings.length === 0) {
+    return null;
+  }
+
+  const sum = ratings.reduce((acc, rating) => acc + rating.value, 0);
+  return sum / ratings.length;
 }

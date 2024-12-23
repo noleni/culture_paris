@@ -1,5 +1,6 @@
+@use "../../styles/breaks.scss";
 .event-content {
-  display: flex;
+
 
   .event-content__actions {
     background-color: var(--base0);
@@ -7,5 +8,12 @@
 
   .event-content__texts {
     padding: 1rem;
+  }
+}
+
+@media (min-width: breaks.$break-medium) {
+  .event-content {
+    display: flex;
+    margin: 60px;
   }
 }
