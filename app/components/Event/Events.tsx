@@ -100,10 +100,11 @@ const Events: React.FC<EventsListProps> = ({
           allPlaces={allPlaces}
           allZipcodes={allZipcodes}
         />
-       {isMapVisible ? <EventMap tag={tag} events={filteredEvents} />
-        :
-        <EventsList tag={tag} filteredEvents={filteredEvents} />
-        }
+        {isMapVisible ? (
+          <EventMap tag={tag} events={filteredEvents} />
+        ) : (
+          <EventsList tag={tag} filteredEvents={filteredEvents} />
+        )}
       </div>
     </div>
   );

@@ -33,8 +33,6 @@ const EventMap: React.FC<EventMapProps> = ({ events, tag }) => {
     longitude: 2.36229800729188,
   };
 
-  console.log("events", events);
-
   return (
     <MapContainer
       center={[defaultCenter.latitude, defaultCenter.longitude]}

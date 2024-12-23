@@ -1,5 +1,4 @@
-"use client";
-import { SetStateAction, useState} from "react";
+import { useState } from "react";
 import type { Event } from "../../types/eventsTypes";
 import EventMap from "./EventMap";
 import Rater from "../UI/Rater";
@@ -8,25 +7,17 @@ import { CiEdit } from "react-icons/ci";
 import { CiHeart } from "react-icons/ci";
 import { CiFacebook } from "react-icons/ci";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
 import styles from "./eventLocalisation.module.scss";
 
 interface EventLocalisationProps {
   event: Event;
 }
 
-const EventLocalisation: React.FC<EventLocalisationProps> = ({event}) => {
-  const { data: session } = useSession();
-  const [rating, setRating] = useState(0);
+const EventLocalisation: React.FC<EventLocalisationProps> = ({ event }) => {
   const [loginModalOpen, setLoginModalOpen] = useState(false);
 
-  const handleRating = (rating: SetStateAction<number>) => {
-    if (!session) {
-      setLoginModalOpen(true);
-      return;
-    }
-    setRating(rating);
-  }
+  console.log(event);
+
   return (
     <>
       {loginModalOpen && (
@@ -37,11 +28,10 @@ const EventLocalisation: React.FC<EventLocalisationProps> = ({event}) => {
       )}
       <aside className={styles["event-localisation"]}>
         <div className={styles["event-localisation__infos"]}>
- 
           <div
             className={`${styles["event-localisation__user-actions"]} ${styles["event-localisation__section"]}`}
           >
-            <Rater rating={rating} setRating={handleRating} />
+            <Rater rating={event.userRating} setLoginModalOpen={setLoginModalOpen} />
             <button type="button">
               <CiEdit />
               Ecrire un avis
@@ -72,9 +62,7 @@ const EventLocalisation: React.FC<EventLocalisationProps> = ({event}) => {
             <p>{event.place.address_street}</p>
             <p>{event.place.address_zipcode}</p>
           </div>
-          <EventMap
-            events={event ? [event] : []}
-          />
+          <EventMap events={event ? [event] : []} />
         </div>
       </aside>
     </>

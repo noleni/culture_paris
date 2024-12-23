@@ -1,4 +1,7 @@
 import { prisma } from "../prisma";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { getRating } from "../rating";
 import { Event, EventTag } from "../../app/types/eventsTypes";
 import {
   formatEventDates,
@@ -47,6 +50,7 @@ export async function getCurrentEvents(tag: string): Promise<{
 
 // Récupérer un événement par son ID
 export async function getEventById(id: string): Promise<Event | null> {
+  const session = await getServerSession(authOptions);
   const event = await prisma.eventsData.findUnique({
     where: {
       id: id,
@@ -61,7 +65,10 @@ export async function getEventById(id: string): Promise<Event | null> {
     return null;
   }
 
-  console.log("formatEvent(event)", formatEvent(event));
+  if (session?.user?.id) {
+    const userRating = await getRating(id, session.user.id);
+    event.userRating = userRating;
+  }
 
   return formatEvent(event);
 }

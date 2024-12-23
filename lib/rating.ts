@@ -1,23 +1,36 @@
+"use server";
 import { prisma } from "./prisma";
 
-export const addRating = async (
+export const addOrUpdateRating = async (
   eventId: string,
   userId: string,
-  rating: number
+  value: number
 ): Promise<void> => {
-  await prisma.rating.create({
-    data: {
-      value: rating,
-      event: {
-        connect: {
-          id: eventId,
-        },
+  await prisma.rating.upsert({
+    where: {
+      userId_eventId: {
+        eventId,
+        userId,
       },
-      user: {
-        connect: {
-          id: userId,
-        },
-      },
+    },
+    update: {
+      value: value,
+    },
+    create: {
+      eventId: eventId,
+      userId: userId,
+      value: value,
     },
   });
 };
+
+export const getRating = async ( eventId: string, userId: string): Promise<number | null> => {
+  const rating = await prisma.rating.findFirst({
+    where: {
+      eventId: eventId,
+      userId: userId,
+    },
+  });
+
+  return rating?.value || null;
+}

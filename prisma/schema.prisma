@@ -130,7 +130,7 @@ model Rating {
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
 
-  @@unique([userId, eventId]) // Un utilisateur peut évaluer un événement une seule fois
+  @@unique([userId, eventId], map: "event_user_unique")
 }
 
 model Comment {
