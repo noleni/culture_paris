@@ -111,6 +111,7 @@ model EventsData {
   access_type   String
   access_link   String
   access_link_text String
+  average_rating Float?
   tags          Tag[]       @relation("EventTags")
   placeId       Int
   place         PlacesData  @relation("PlaceEvents", fields: [placeId], references: [id])

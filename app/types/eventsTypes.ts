@@ -44,5 +44,5 @@ export interface Event {
   place: EventPlace;
   tags: EventTag[];
   userRating?: number;
-  averageRating?: number;
+  average_rating?: number;
 }

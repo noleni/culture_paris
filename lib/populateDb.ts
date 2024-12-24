@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import { getAverageRating } from "./rating";
 import axios from "axios";
 
 const prisma = new PrismaClient();
@@ -33,6 +34,7 @@ interface RawEventData {
   contact_url?: string;
   access_link?: string;
   tags: string[];
+  average_rating?: number;
 }
 
 async function createTags(
@@ -144,7 +146,15 @@ async function createEvent(eventData: RawEventData, placeId: number) {
 
   // Si l'événement existe déjà, retourne-le
   if (existingEvent) {
-    return existingEvent;
+    const averageRating = await getAverageRating(existingEvent.id);
+    return await prisma.eventsData.update({
+      where: {
+        title,
+      },
+      data: {
+        average_rating: averageRating || null,
+      },
+    });
   }
 
   // Recherche les tags existants
@@ -180,6 +190,8 @@ async function createEvent(eventData: RawEventData, placeId: number) {
       price_detail: price_detail || "",
       access_type: access_type || "",
       access_link_text: access_link_text || "",
+      average_rating: null,
+
       tags: {
         connect: eventTags.map((tag) => ({ id: tag.id })),
       },
