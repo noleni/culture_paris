@@ -16,24 +16,6 @@
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
   }
 
-  .card__icons {
-    display: flex;
-    justify-content: flex-end;
-    gap: 8px;
-    padding: 0 12px 12px 0;
-    svg {
-      width: 20px;
-      height: 20px;
-      color: var(--base40);
-      transition: color 0.2s, transform 0.2s;
-
-      &:hover {
-        color: var(--primary);
-        transform: scale(1.2);
-      }
-    }
-  }
-
   .card__image {
     position: relative;
     width: 100%;
@@ -66,16 +48,48 @@
 
   .card__title {
     padding: 12px;
+    height: 66px;
     max-width: 80%;
 
     h5 {
-      line-height: 1.6;
       color: var(--base10);
       display: -webkit-box;
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 2;
       overflow: hidden;
       text-overflow: ellipsis;
+    }
+  }
+
+  .card__actions {
+    flex-grow: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    padding: 0 12px 12px 12px;
+
+    .card__icons {
+      display: flex;
+      font-size: 1.2rem;
+      gap: 8px;
+      svg {
+        color: var(--base40);
+        transition: color 0.2s, transform 0.2s;
+
+        &:hover {
+          color: var(--primary);
+          transform: scale(1.2);
+        }
+      }
+    }
+
+    .card__rating {
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      color: var(--primary50);
+      border: 1.5px solid var(--primary10);
+      padding: 2px 8px;
     }
   }
 }

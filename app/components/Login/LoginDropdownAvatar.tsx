@@ -51,7 +51,7 @@ const LoginDropdownAvatar: React.FC<LoginDropdownAvatarProps> = ({
           isDropdownOpen ? styles["opened"] : ""
         }`}
       >
-        <Link href={`/profile/${user.slug}`}>Profil</Link>
+        <Link href={`/profile/${user.slug}`} onClick={() => setIsDropdownOpen(false)}>Profil</Link>
         <button onClick={() => console.log("Préférences clicked")}>
           Préférences
         </button>

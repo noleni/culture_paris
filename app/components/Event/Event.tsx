@@ -44,7 +44,7 @@ const Event: React.FC<EventProps> = ({ event }) => {
               </ul>
               <div className={styles.cover_title}>
                 <h1>{event.title}</h1>
-                <div className={styles.event_metrics}></div>
+                <div className={styles.event_metrics}>{event.average_rating}</div>
               </div>
             </div>
             <Image src={event.cover_url} alt={event.cover_alt} priority fill />
