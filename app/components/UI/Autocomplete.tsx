@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 
 import styles from "./autocomplete.module.scss";
 
@@ -11,6 +11,7 @@ const CustomAutocomplete: React.FC<{
   const [inputValue, setInputValue] = useState(value);
   const [isOptionsVisible, setIsOptionsVisible] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
+  const listRef = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
     setInputValue(value);
@@ -81,58 +82,68 @@ const CustomAutocomplete: React.FC<{
     }
   };
 
+    useEffect(() => {
+      if (listRef.current && selectedIndex >= 0) {
+        const activeItem = listRef.current.children[selectedIndex] as HTMLElement;
+        activeItem.scrollIntoView({ block: "nearest" });
+      }
+    }, [selectedIndex]);
+
   return (
-    <div className={styles.autocomplete}>
-      <div className={styles.autocomplete__inputContainer}>
-        <input
-          id="autocomplete-input"
-          className={styles.autocomplete__input}
-          type="text"
-          value={inputValue}
-          onFocus={() => setIsOptionsVisible(true)}
-          onBlur={handleBlur}
-          onChange={handleInputChange}
-          onKeyDown={handleKeyDown} // Gestion des touches
-          placeholder={placeholder}
-          aria-owns="autocomplete-list"
-          aria-autocomplete="list"
-        />
-        {inputValue && (
-          <button
-            type="button"
-            className={styles.autocomplete__clearButton}
-            onClick={handleClearInput}
-            aria-label="Clear input"
+    <div className={styles.autocomplete_container}>
+      <div className={styles.autocomplete}>
+        <div className={styles.autocomplete__inputContainer}>
+          <input
+            id="autocomplete-input"
+            className={styles.autocomplete__input}
+            type="text"
+            value={inputValue}
+            onFocus={() => setIsOptionsVisible(true)}
+            onBlur={handleBlur}
+            onChange={handleInputChange}
+            onKeyDown={handleKeyDown} // Gestion des touches
+            placeholder={placeholder}
+            aria-owns="autocomplete-list"
+            aria-autocomplete="list"
+          />
+        </div>
+        {filteredOptions.length > 0 && isOptionsVisible && (
+          <ul
+            ref={listRef}
+            id="autocomplete-list"
+            role="listbox"
+            className={
+              styles.autocomplete__list +
+              " " +
+              (isOptionsVisible ? styles["open"] : "")
+            }
           >
-            &times;
-          </button>
+            {filteredOptions.map((option, index) => (
+              <li
+                key={option}
+                role="option"
+                aria-selected={selectedIndex === index}
+                className={`${styles.autocomplete__item} ${
+                  selectedIndex === index ? styles["highlighted"] : ""
+                }`} // Ajouter une classe pour l'élément sélectionné
+                onClick={() => handleOptionClick(option)}
+                tabIndex={0} // Permet de naviguer avec Tab
+              >
+                {option}
+              </li>
+            ))}
+          </ul>
         )}
       </div>
-      {filteredOptions.length > 0 && isOptionsVisible && (
-        <ul
-          id="autocomplete-list"
-          role="listbox"
-          className={
-            styles.autocomplete__list +
-            " " +
-            (isOptionsVisible ? styles["open"] : "")
-          }
+      {inputValue && (
+        <button
+          type="button"
+          className={styles.autocomplete__clearButton}
+          onClick={handleClearInput}
+          aria-label="Clear input"
         >
-          {filteredOptions.map((option, index) => (
-            <li
-              key={option}
-              role="option"
-              aria-selected={selectedIndex === index}
-              className={`${styles.autocomplete__item} ${
-                selectedIndex === index ? styles["highlighted"] : ""
-              }`} // Ajouter une classe pour l'élément sélectionné
-              onClick={() => handleOptionClick(option)}
-              tabIndex={0} // Permet de naviguer avec Tab
-            >
-              {option}
-            </li>
-          ))}
-        </ul>
+          &times;
+        </button>
       )}
     </div>
   );

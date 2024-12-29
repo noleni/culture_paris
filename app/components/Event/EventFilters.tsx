@@ -67,7 +67,7 @@ const handleChange = (value: string, field: "place" | "zipcode" | "dateStart" | 
             onClick={() => setShowFilters(false)}
           />
           <div className={styles["events__filter"]}>
-            <h5>Lieu</h5>
+            <h6>Lieu</h6>
             <CustomAutocomplete
               options={allPlaces}
               value={place}
@@ -77,7 +77,7 @@ const handleChange = (value: string, field: "place" | "zipcode" | "dateStart" | 
           </div>
 
           <div className={styles["events__filter"]}>
-            <h5>Arrondissements</h5>
+            <h6>Arrondissements</h6>
             <CustomAutocomplete
               options={allZipcodes}
               value={zipcode}
@@ -86,12 +86,12 @@ const handleChange = (value: string, field: "place" | "zipcode" | "dateStart" | 
             />
           </div>
           <div className={styles["events__filter"]}>
-            <h5>Date</h5>
+            <h6>Date</h6>
             <input type="date" id="start" name="start" />
             <input type="date" id="end" name="end" />
           </div>
           <div className={styles["events__filter"]}>
-            <h5>Catégories</h5>
+            <h6>Catégories</h6>
             <ul className={styles["events__tags"]}>
               {allTags &&
                 allTags.map((tag) => (

@@ -92,10 +92,26 @@ h1 {
 }
 
 h5 {
-  font-weight: 400;
+  font-size: 1.1rem;
+  font-weight: 300;
 }
 
-small {
+h6 {
+  font-size: 0.9rem;
+  font-weight: 400;
+  margin: 0.2rem 0;
+
+  &::before {
+    content: "";
+    display: block;
+    width: 250px;
+    height: 1px;
+    background-color: var(--primary0);
+    margin: 0.5rem 0 0.5rem 0;
+  }
+}
+
+small, li {
   font-size: 0.8rem;
 }
 

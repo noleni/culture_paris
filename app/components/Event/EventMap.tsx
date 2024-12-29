@@ -3,8 +3,7 @@ import { MapContainer, TileLayer, Marker, Popup} from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import type { Event } from "../../types/eventsTypes";
-import Image from "next/image";
-import Link from "next/link";
+import Card from "../Card";
 
 import styles from "./events.module.scss";
 
@@ -52,38 +51,13 @@ const EventMap: React.FC<EventMapProps> = ({ events, tag }) => {
         >
           {tag && (
             <Popup
-              className={styles.tooltip} // Utilise le même style que pour Tooltip
               closeButton={false} // Désactive le bouton de fermeture
               closeOnClick={true}
               autoPan={true} // Active le déplacement automatique
               autoPanPadding={[10, 50]} // Ajoute une marge pour éviter que le popup touche le bord
               autoPanPaddingTopLeft={[0, 50]}
             >
-              <Link
-                className={styles["tooltip-content"]}
-                href={`/${tag.toLowerCase()}/${event.id}`}
-              >
-                {/* Image de couverture */}
-                <div className="tooltip-cover">
-                  <Image
-                    src={event.cover_url}
-                    alt={event.title}
-                    width={200}
-                    height={100}
-                    style={{ objectFit: "cover", borderRadius: "5px" }}
-                  />
-                </div>
-                {/* Titre */}
-                <h3 className={styles["tooltip-title"]}>{event.title}</h3>
-                {/* Dates */}
-                <p className="tooltip-dates">
-                  du {event.date_start} au {event.date_end}
-                </p>
-                {/* Adresse */}
-                <p className={styles["tooltip-address"]}>
-                  {event.place.address_name}
-                </p>
-              </Link>
+              <Card event={event} href={`/${tag.toLowerCase()}/${event.id}`} />
             </Popup>
           )}
         </Marker>

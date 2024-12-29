@@ -33,7 +33,7 @@ const Card: React.FC<CardProps> = ({ event, href }) => {
         </div>
       </div>
       <div className={styles.card__title}>
-        <h5 className="bold">{event.title}</h5>
+        <h5>{event.title}</h5>
       </div>
       <div className={styles.card__actions}>
         <span className={styles.card__rating}>{event.average_rating ? event.average_rating : "-"}</span>
