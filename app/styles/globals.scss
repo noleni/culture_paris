@@ -1,6 +1,8 @@
 // styles/globals.scss
 
 @use "breaks.scss" as *;
+@import 'slick-carousel/slick/slick.css';
+@import 'slick-carousel/slick/slick-theme.css';
 
 .theme--light {
   /* Thème clair (par défaut) */
@@ -27,19 +29,24 @@
   --primary30: #53c0a6;
   --primary40: #5ecfb4;
   --primary50: #69dfc1;
+  --primary60: #74efcf;
+  --primary70: #7fffdc;
+  --primary80: #8affea;
+  --primary90: #95fff7;
+  --primary100: #a0fffe;
 }
 
 .theme--dark {
   --base0: #f5f5f5;
-  --base10: #e0e0e0;
-  --base20: #c4c4c4;
-  --base30: #a8a8a8;
-  --base40: #8c8c8c;
-  --base50: #707070;
+  --base10: #a3a3a3;
+  --base20: #8a8a8a;
+  --base30: #696969;
+  --base40: #4f4f4f;
+  --base50: #333333;
 
-  --surface0: #121212;
+  --surface0: #0d0d0d;
   --surface0rgb: 18, 18, 18;
-  --surface10: #282828;
+  --surface10: #1c1c1c;
   --surface20: #3f3f3f;
   --surface30: #575757;
   --surface40: #717171;
@@ -92,7 +99,7 @@ h1 {
 }
 
 h5 {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 300;
 }
 
@@ -101,7 +108,7 @@ h6 {
   font-weight: 400;
   margin: 0.2rem 0;
 
-  &::before {
+  &.line-up::before {
     content: "";
     display: block;
     width: 250px;
@@ -111,8 +118,12 @@ h6 {
   }
 }
 
-small, li {
+small {
   font-size: 0.8rem;
+}
+
+li {
+  font-size: 1rem;
 }
 
 button {
@@ -213,12 +224,12 @@ main {
 }
 
 .tag {
-  color: var(--primary0);
-  background-color: rgba(14, 199, 136, 0.1);
+  color: var(--primary100);
+  background-color: rgba(50, 144, 125, 0.8);
   width: fit-content;
-  border-radius: 8px;
-  padding: 2px 6px;
-  font-size: 0.8rem;
+  border-radius: 10px;
+  padding: 6px 8px;
+  font-size: 1rem;
 }
 
 @media (min-width: $break-medium) {

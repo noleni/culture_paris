@@ -4,27 +4,19 @@ import EventContent from "./EventContent";
 import type { Event } from "../../types/eventsTypes";
 import { CiCircleChevDown } from "react-icons/ci";
 
-import styles from "./eventCover.module.scss";
+import styles from "./event.module.scss";
 
 interface EventProps {
   event: Event;
 }
 
 const Event: React.FC<EventProps> = ({ event }) => {
-  function extractFiguresAndText(description: string) {
-    const figureRegex = /<figure[^>]*>[\s\S]*?<\/figure>/gi;
-    const textRegex = /<p[^>]*>[\s\S]*?<\/p>/gi;
 
-    const figures = description.match(figureRegex) || [];
-    const extractedDescription = description.match(textRegex) || [];
-
-    return { figures, extractedDescription };
-  }
-
-  const { extractedDescription } = extractFiguresAndText(event.description);
+  console.log("event", event);
 
   const scrollDown = () => {
     const cover = document.querySelector(`.${styles["event-content"]}`);
+    console.log("document", document);
     cover?.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -44,8 +36,8 @@ const Event: React.FC<EventProps> = ({ event }) => {
               </ul>
               <div className={styles.cover_title}>
                 <h1>{event.title}</h1>
-                <div className={styles.event_metrics}>{event.average_rating}</div>
               </div>
+              <div className={styles.event_metrics}>{event.average_rating}</div>
             </div>
             <Image src={event.cover_url} alt={event.cover_alt} priority fill />
             <CiCircleChevDown
@@ -56,20 +48,7 @@ const Event: React.FC<EventProps> = ({ event }) => {
           </div>
         )}
       </div>
-      <EventContent event={event} extractedDescription={extractedDescription} />
-      {/* {figures.length > 0 && (
-          <Slider {...sliderSettings}>
-            {figures.map((figure, index) => (
-              <div
-                key={index}
-                className="figure-slide"
-                dangerouslySetInnerHTML={{
-                  __html: DOMPurify.sanitize(figure),
-                }}
-              />
-            ))}
-          </Slider>
-        )} */}
+      <EventContent event={event} />
     </div>
   );
 };

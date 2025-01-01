@@ -70,5 +70,11 @@ export async function getEventById(id: string): Promise<Event | null> {
     event.userRating = userRating;
   }
 
+  if (event.description_figures)
+    event.figures = JSON.parse(event.description_figures);
+
+  if (event.description_text)
+    event.text = JSON.parse(event.description_text);
+
   return formatEvent(event);
 }

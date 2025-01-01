@@ -67,3 +67,36 @@ export const getAllPlaces = (
     allZipcodes: Array.from(uniqueZipcodes).sort(),
   };
 };
+
+export const parseDescription = (description: string) => {
+  const pRegex = /<p[^>]*>[\s\S]*?<\/p>/gi;
+  const figureRegex = /<figure[^>]*>[\s\S]*?<\/figure>/g;
+
+  const figures = [];
+
+  // Extraction des paragraphes
+  const paragraph = description.match(pRegex) || [];
+
+  console.log("paragraph", paragraph);
+
+  // Extraction des figures avec image et figcaption
+  let figureMatch;
+  while ((figureMatch = figureRegex.exec(description)) !== null) {
+    const figureHtml = figureMatch[0]; // Le HTML complet de la figure
+
+    // Extraction de l'URL de l'image
+    const imgSrcMatch = figureHtml.match(/<img [^>]*src="([^"]+)"/);
+    const imgUrl = imgSrcMatch ? imgSrcMatch[1] : null;
+
+    // Extraction de la légende
+    const figcaptionMatch = figureHtml.match(/<figcaption>(.*?)<\/figcaption>/);
+    const figcaption = figcaptionMatch ? figcaptionMatch[1].trim() : null;
+
+    figures.push({
+      imgUrl,
+      figcaption,
+    });
+  }
+
+  return { paragraph, figures };
+};

@@ -34,10 +34,6 @@
 
       .events__filter {
         margin-bottom: 10px;
-        h5 {
-          margin-bottom: 2px;
-          color: var(--base0);
-        }
 
         .events__tags {
           display: flex;
@@ -94,43 +90,6 @@
       .events__list {
         flex: 1;
         margin: 0 1rem;
-      }
-
-      .events__map {
-        flex: 1;
-        margin: 0 1rem;
-
-        .tooltip {
-          pointer-events: auto !important; /* Assure l'interaction avec le popup */
-          width: 250px; /* Largeur fixe */
-          background-color: var(--surface0);
-          color: var(--white);
-          border-radius: 8px;
-          padding: 10px;
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-          text-align: center;
-          overflow: hidden;
-
-          .tooltip-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-
-            h3 {
-              margin: 5px 0;
-              word-wrap: break-word;
-            }
-
-            .tooltip-dates,
-            .tooltip-address {
-              margin: 2px 0;
-            }
-
-            .tooltip-cover img {
-              border-radius: 5px;
-            }
-          }
-        }
       }
     }
   }

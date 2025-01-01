@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { getAverageRating } from "./rating";
+import { parseDescription } from "./events/eventsUtils";
 import axios from "axios";
 
 const prisma = new PrismaClient();
@@ -35,11 +36,18 @@ interface RawEventData {
   access_link?: string;
   tags: string[];
   average_rating?: number;
+  contact_mail?: string;
+  contact_facebook?: string;
+  contact_twitter?: string;
+  price_type?: string;
+  price_detail?: string;
+  access_type?: string;
+  access_link_text?: string;
 }
 
 async function createTags(
   events: Array<{
-    title: string;
+    title: string; // Titre de l'événement
     tags: string[]; // Liste des tags associés à l'événement
   }>
 ) {
@@ -69,7 +77,7 @@ async function createTags(
     // Associe les tags à l'événement dans la base de données
     await prisma.eventsData.update({
       where: {
-        title: event.title, // Trouve l'événement par son titre
+        title: event.title
       },
       data: {
         tags: {
@@ -157,6 +165,10 @@ async function createEvent(eventData: RawEventData, placeId: number) {
     });
   }
 
+  const { paragraph, figures } = description
+    ? parseDescription(description)
+    : { paragraph: [], figures: [] };
+
   // Recherche les tags existants
   const eventTags = await prisma.tag.findMany({
     where: {
@@ -175,7 +187,8 @@ async function createEvent(eventData: RawEventData, placeId: number) {
       date_start: date_start ? new Date(date_start) : new Date(),
       date_end: date_end ? new Date(date_end) : new Date(),
       date_description: date_description || "",
-      description: description || "",
+      description_text: JSON.stringify(paragraph),
+      description_figures: JSON.stringify(figures),
       lead_text: lead_text || "",
       cover_url: cover_url || "",
       cover_credit: cover_credit || "",

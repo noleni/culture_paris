@@ -33,7 +33,6 @@ const Rater: React.FC<RaterProps> = (props: RaterProps) => {
 
   return (
     <form className={styles.rater}>
-      <p>Ma note :</p>
       {[...Array(10)].map((_, i) => {
         const ratingValue = i + 1;
 
@@ -49,9 +48,7 @@ const Rater: React.FC<RaterProps> = (props: RaterProps) => {
               className="star"
               size={18}
               color={
-                ratingValue <= (hover || rating || 0)
-                  ? "#ffc107"
-                  : "#e4e5e9"
+                ratingValue <= (hover || rating || 0) ? "#ffc107" : "#e4e5e9"
               }
               onMouseEnter={() => setHover(ratingValue)}
               onMouseLeave={() => setHover(0)}

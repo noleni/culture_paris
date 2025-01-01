@@ -1,0 +1,46 @@
+.slider_wrapper {
+  background-color: var(--surface20);
+  padding: 6px 0; /* Espacement vertical autour du slider */
+  margin: 18px 0;
+  border-radius: 8px; /* Coins arrondis */
+
+  .slider_container {
+    margin: 0 auto; /* Centrer le slider */
+    width: 90%; /* Limiter la largeur globale */
+    max-width: 800px; /* Largeur maximale */
+
+    .slider_item {
+      text-align: center;
+      position: relative;
+      height: 300px;
+
+      .image_wrapper {
+        height: 300px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        background-color: var(--surface20);
+        border-radius: 8px; /* Coins arrondis */
+      }
+      .image_wrapper :global(img) {
+        height: 100%;
+        width: auto;
+        object-fit: contain;
+      }
+      figcaption {
+        margin-top: 10px;
+        font-size: 14px;
+      }
+      .slick-dots {
+        bottom: -20px; /* Positionner les boutons en dessous */
+      }
+      .slick-dots li button:before {
+        color: #fff; /* Couleur des points */
+      }
+      .slick-dots li.slick-active button:before {
+        color: #ffcc00; /* Couleur du point actif */
+      }
+    }
+  }
+}

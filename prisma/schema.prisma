@@ -94,7 +94,8 @@ model EventsData {
   info          String
   url           String
   lead_text     String
-  description   String
+  description_text String
+  description_figures String
   date_start    DateTime
   date_end      DateTime
   date_description String

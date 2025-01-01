@@ -21,7 +21,8 @@ export interface Event {
   info: string;
   url: string;
   lead_text: string;
-  description: string;
+  description_text: string[];
+  description_figures: string;
   date_start: Date;
   date_end: Date;
   date_description: string;
@@ -45,4 +46,6 @@ export interface Event {
   tags: EventTag[];
   userRating?: number;
   average_rating?: number;
+  figures?: { imgUrl: string, figcaption: string}[];
+  text?: string[];
 }
