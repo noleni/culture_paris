@@ -72,7 +72,7 @@ const handleChange = (value: string, field: "place" | "zipcode" | "dateStart" | 
               options={allPlaces}
               value={place}
               onChange={(newValue) => handleChange(newValue, "place")}
-              placeholder="Tous les lieux"
+              placeholder="Rechercher..."
             />
           </div>
 
@@ -82,7 +82,7 @@ const handleChange = (value: string, field: "place" | "zipcode" | "dateStart" | 
               options={allZipcodes}
               value={zipcode}
               onChange={(newValue) => handleChange(newValue, "zipcode")}
-              placeholder="Tous les arrondissements"
+              placeholder="Rechercher..."
             />
           </div>
           <div className={styles["events__filter"]}>

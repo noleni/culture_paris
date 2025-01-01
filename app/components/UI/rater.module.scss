@@ -1,4 +1,6 @@
 .rater {
+  display: flex;
+  justify-content: space-around;
   padding: 0.2rem 0;
 
   label {
@@ -6,6 +8,11 @@
 
     input {
       display: none;
+
+      svg {
+        height: 30px;
+        width: 30px;
+      }
     }
   }
 

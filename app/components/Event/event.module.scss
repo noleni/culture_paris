@@ -37,10 +37,10 @@
       .cover_infos {
         position: absolute;
         z-index: 2; /* Par-dessus l'overlay */
-        top: 30%;
-        left: 2.5rem;
+        top: 25%;
+        left: 4rem;
         z-index: 2; /* Par-dessus l'overlay */
-        max-width: 800px;
+        max-width: 900px;
         .cover_tags {
           display: flex;
           gap: 0.5rem;
@@ -49,9 +49,9 @@
         }
 
         .cover_title {
+
           h1 {
             color: white;
-            text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
           }
         }
 
@@ -66,7 +66,7 @@
       .cover_scrolldown {
         position: absolute;
         font-size: 3rem;
-        bottom: 6rem;
+        bottom: 10rem;
         left: 50%;
         transform: translateX(-50%);
         z-index: 2; /* Par-dessus l'overlay */
@@ -87,29 +87,6 @@
         color: white;
       }
     }
-
-    .title {
-      position: absolute;
-      bottom: -10%;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 2;
-      text-align: center;
-      line-height: 1.2;
-      background-color: var(--surface0);
-      padding: 1rem 1.5rem;
-
-      .avg-rating {
-        width: fit-content;
-        border: 1px solid var(--base0);
-        justify-self: center;
-        margin-top: 0.8rem;
-
-        p {
-          padding: 0.2rem 0.5rem;
-        }
-      }
-    }
   }
 
   .event-content {
@@ -119,7 +96,6 @@
     .event-localisation {
       min-width: 300px;
       background-color: var(--surface0);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       padding: 0 24px;
       border-radius: 5px;
       margin: 0 1rem;
