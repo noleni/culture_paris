@@ -1,7 +1,7 @@
-@use "../../app/styles/breaks.scss";
+@use "../../../app/styles/breaks.scss";
 .event {
   .cover {
-    position: relative; /* Nécessaire pour positionner l'image et le contenu en absolu */
+    position: relative; 
     aspect-ratio: 16/9;
 
     .cover_image {
@@ -27,25 +27,24 @@
         background: linear-gradient(
           to bottom,
           rgba(0, 0, 0, 0.2) 20%,
-          /* Transparent en haut */ rgba(0, 0, 0, 0.6) 40%,
-          /* Dégradé progressif */ rgba(0, 0, 0, 0.9) 100%
-            /* Plus sombre en bas */
+          rgba(0, 0, 0, 0.6) 40%,
+          rgba(0, 0, 0, 0.9) 100%
         );
         z-index: 1;
       }
 
       .cover_infos {
         position: absolute;
-        z-index: 2; /* Par-dessus l'overlay */
+        z-index: 2;
         top: 25%;
         left: 4rem;
-        z-index: 2; /* Par-dessus l'overlay */
+        z-index: 2;
         max-width: 900px;
         .cover_tags {
           display: flex;
           gap: 0.5rem;
           margin-bottom: 1rem;
-          z-index: 2; /* Par-dessus l'overlay */
+          z-index: 2;
         }
 
         .cover_title {
@@ -92,7 +91,7 @@
     display: flex;
     flex-direction: column;
 
-    .event_localisation {
+    aside {
       min-width: 300px;
       border-radius: 5px;
       margin: 0 1rem;

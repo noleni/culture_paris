@@ -1,9 +1,9 @@
 "use client";
 import { useState } from "react";
-import { Event, EventTag } from "../../app/types/eventsTypes";
+import { Event, EventTag } from "../../../app/types/eventsTypes";
 import EventFilters from "./EventFilters";
 import EventsList from "./EventsList";
-import EventMap from "./EventMap";
+import EventMap from "../EventMap";
 import { CiMap } from "react-icons/ci";
 import { CiGrid41 } from "react-icons/ci";
 

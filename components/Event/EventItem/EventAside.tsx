@@ -1,19 +1,19 @@
 import { useState } from "react";
-import type { Event } from "../../app/types/eventsTypes";
-import EventMap from "./EventMap";
-import Rater from "../UI/Rater";
-import LoginModal from "../Login/LoginModal";
+import Link from "next/link";
+import type { Event } from "@/app/types/eventsTypes";
+import EventMap from "../EventMap";
+import Rater from "@/components/UI/Rater";
+import LoginModal from "@/components/Login/LoginModal";
+import WishToogler from "@/components/Wish/WishToogler";
 import { CiEdit } from "react-icons/ci";
 import { CiFacebook } from "react-icons/ci";
-import Link from "next/link";
 import styles from "./event.module.scss";
-import WishToogler from "@/components/Wish/WishToogler";
 
-interface EventLocalisationProps {
+interface EventAsideProps {
   event: Event;
 }
 
-const EventLocalisation: React.FC<EventLocalisationProps> = ({ event }) => {
+const EventAside: React.FC<EventAsideProps> = ({ event }) => {
   const [loginModalOpen, setLoginModalOpen] = useState(false);
 
   return (
@@ -24,7 +24,7 @@ const EventLocalisation: React.FC<EventLocalisationProps> = ({ event }) => {
           setIsModalOpen={setLoginModalOpen}
         />
       )}
-      <aside className={styles.event_localisation}>
+      <aside>
         <div
           className={`${styles.event_localisation__user_actions} ${styles.event_localisation__section}`}
         >
@@ -76,4 +76,4 @@ const EventLocalisation: React.FC<EventLocalisationProps> = ({ event }) => {
   );
 };
 
-export default EventLocalisation;
+export default EventAside;

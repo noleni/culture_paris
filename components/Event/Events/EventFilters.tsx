@@ -1,9 +1,9 @@
 "use client";
 import { useState } from "react";
-import { EventTag } from "../../app/types/eventsTypes";
+import { EventTag } from "../../../app/types/eventsTypes";
 import { HiChevronDoubleLeft } from "react-icons/hi2";
 import { HiChevronDoubleRight } from "react-icons/hi2";
-import CustomAutocomplete from "../UI/Autocomplete";
+import CustomAutocomplete from "../../UI/Autocomplete";
 import styles from "./events.module.scss";
 
 const EventFilters: React.FC<{

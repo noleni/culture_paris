@@ -1,6 +1,6 @@
-import EventLocalisation from "./EventLocalisation";
-import type { Event } from "../../app/types/eventsTypes";
-import SlickSlider from "../UI/Slider";
+import EventAside from "./EventAside";
+import type { Event } from "../../../app/types/eventsTypes";
+import SlickSlider from "../../UI/Slider";
 
 import styles from "./event.module.scss";
 
@@ -11,7 +11,7 @@ interface EventContentProps {
 const EventContent: React.FC<EventContentProps> = ({ event }) => {
   return (
     <div className={styles["event-content"]}>
-      <EventLocalisation event={event} />
+      <EventAside event={event} />
       <div className={styles["event-content__texts"]}>
         <p className={styles.lead_text}>{event.lead_text}</p>
 

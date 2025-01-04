@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import EventContent from "./EventContent";
-import type { Event } from "../../app/types/eventsTypes";
+import type { Event } from "../../../app/types/eventsTypes";
 import { CiCircleChevDown } from "react-icons/ci";
 
 import styles from "./event.module.scss";

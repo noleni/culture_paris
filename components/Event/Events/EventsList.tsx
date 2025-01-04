@@ -1,5 +1,5 @@
-import { Event } from "../../app/types/eventsTypes";
-import Card from "../Card";
+import { Event } from "../../../app/types/eventsTypes";
+import Card from "../../Card";
 
 import styles from "./events.module.scss";
 
