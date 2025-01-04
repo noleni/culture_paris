@@ -1,10 +1,12 @@
 "use server";
 import { prisma } from "./prisma";
+import { revalidatePath } from "next/cache";
 
 export const addOrUpdateRating = async (
   eventId: string,
   userId: string,
-  value: number
+  value: number,
+  firstPathSegment: string | null,
 ): Promise<void> => {
   await prisma.rating.upsert({
     where: {
@@ -22,6 +24,7 @@ export const addOrUpdateRating = async (
       value,
     },
   });
+  if (firstPathSegment) revalidatePath(`/${firstPathSegment}/[id]`, `layout`);
 };
 
 export const getRating = async ( eventId: string, userId: string): Promise<number | null> => {

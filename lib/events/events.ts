@@ -67,13 +67,20 @@ export async function getEventById(id: string): Promise<Event | null> {
 
   if (session?.user?.id) {
     const userRating = await getRating(id, session.user.id);
+    const isWished = await prisma.wishlistItem.findFirst({
+      where: {
+        userId: session.user.id,
+        eventId: id,
+      },
+    });
     event.userRating = userRating;
+    event.isWished = isWished ? true : false;
   }
 
-  if (event.description_figures)
+  if (event?.description_figures)
     event.figures = JSON.parse(event.description_figures);
 
-  if (event.description_text)
+  if (event?.description_text)
     event.text = JSON.parse(event.description_text);
 
   return formatEvent(event);

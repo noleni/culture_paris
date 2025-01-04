@@ -6,8 +6,12 @@ import LoginModal from "../Login/LoginModal";
 import { CiEdit } from "react-icons/ci";
 import { CiHeart } from "react-icons/ci";
 import { CiFacebook } from "react-icons/ci";
+import { addOrDeleteWish } from "@/lib/wish";
 import Link from "next/link";
 import styles from "./event.module.scss";
+import { useSession } from "next-auth/react";
+import { usePathname } from "next/navigation";
+import { getFirstPathSegment } from "@/app/utils/getFirstPathSegment";
 
 interface EventLocalisationProps {
   event: Event;
@@ -15,8 +19,20 @@ interface EventLocalisationProps {
 
 const EventLocalisation: React.FC<EventLocalisationProps> = ({ event }) => {
   const [loginModalOpen, setLoginModalOpen] = useState(false);
+  const { data: session } = useSession();
+  const firstPathSegment = getFirstPathSegment(usePathname());
 
-  console.log(event);
+  const handleWish = async () => {
+    if (!session) {
+      setLoginModalOpen(true);
+      return;
+    }
+    try {
+      await addOrDeleteWish(event.id, session.user.id, firstPathSegment);
+    } catch (error) {
+      console.error("Erreur lors de l'ajout du wish", error);
+    }
+  }
 
   return (
     <>
@@ -35,15 +51,15 @@ const EventLocalisation: React.FC<EventLocalisationProps> = ({ event }) => {
             {event?.userRating && <h6>{event.userRating}</h6>}
           </div>
           <Rater
-            rating={event.userRating}
+            rating={event?.userRating || 0}
             setLoginModalOpen={setLoginModalOpen}
           />
           <button type="button">
             <CiEdit size={30} />
             Ecrire un avis
           </button>
-          <button type="button">
-            <CiHeart size={30} />
+          <button onClick={handleWish}>
+            <CiHeart size={30} className={event?.isWished ? styles.active : ""}/>
             Ajouter à mes envies
           </button>
         </div>

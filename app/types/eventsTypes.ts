@@ -45,6 +45,7 @@ export interface Event {
   place: EventPlace;
   tags: EventTag[];
   userRating?: number;
+  isWished?: boolean;
   average_rating?: number;
   figures?: { imgUrl: string, figcaption: string}[];
   text?: string[];

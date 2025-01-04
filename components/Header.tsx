@@ -8,34 +8,30 @@ import styles from "./header.module.scss";
 import { usePathname } from "next/navigation";
 import { AiOutlineSearch, AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { IoMdNotificationsOutline } from "react-icons/io";
+import { getFirstPathSegment } from "@/app/utils/getFirstPathSegment";
 
 const Navbar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
 
-  const useFirstPathSegment = () => {
-    const pathname = usePathname();
-    if (!pathname) return null;
-    const segments = pathname.split("/").filter(Boolean);
-    return segments[0] || null;
-  };
+  const firstPathSegment = getFirstPathSegment(usePathname());
 
   const navigation = [
-    { name: "Expos", href: "/expo", current: useFirstPathSegment() === "expo" },
+    { name: "Expos", href: "/expo", current: firstPathSegment === "expo" },
     {
       name: "Théâtre",
       href: "/theatre",
-      current: useFirstPathSegment() === "theatre",
+      current: firstPathSegment === "theatre",
     },
     {
       name: "Concert",
       href: "/concert",
-      current: useFirstPathSegment() === "concert",
+      current: firstPathSegment === "concert",
     },
     {
       name: "Danse",
       href: "/danse",
-      current: useFirstPathSegment() === "danse",
+      current: firstPathSegment === "danse",
     },
     {
       name: "separator",
@@ -43,7 +39,7 @@ const Navbar: React.FC = () => {
     {
       name: "Jeune public",
       href: "/jeune-public",
-      current: useFirstPathSegment() === "jeune-public",
+      current: firstPathSegment === "jeune-public",
     },
   ];
 
