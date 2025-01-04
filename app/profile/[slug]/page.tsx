@@ -2,8 +2,8 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { getUserById } from "@/lib/users";
 
-import PublicUser from "@/app/components/User/PublicUser";
-import PrivateUser from "@/app/components/User/PrivateUser";
+import PublicUser from "@/components/User/PublicUser";
+import PrivateUser from "@/components/User/PrivateUser";
 
 interface Params {
   params: { slug: string }; // Modifié pour ne pas être un Promise

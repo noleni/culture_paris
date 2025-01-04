@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { Event } from "../../types/eventsTypes";
+import type { Event } from "../../app/types/eventsTypes";
 import EventMap from "./EventMap";
 import Rater from "../UI/Rater";
 import LoginModal from "../Login/LoginModal";
@@ -26,27 +26,30 @@ const EventLocalisation: React.FC<EventLocalisationProps> = ({ event }) => {
           setIsModalOpen={setLoginModalOpen}
         />
       )}
-      <aside className={styles["event-localisation"]}>
-        <div className={styles["event-localisation__infos"]}>
-          <div
-            className={`${styles["event-localisation__user-actions"]} ${styles["event-localisation__section"]}`}
-          >
+      <aside className={styles.event_localisation}>
+        <div
+          className={`${styles.event_localisation__user_actions} ${styles.event_localisation__section}`}
+        >
+          <div className={styles.event_localisation__rating}>
             <h6>Ma note :</h6>
-            <Rater
-              rating={event.userRating}
-              setLoginModalOpen={setLoginModalOpen}
-            />
-            <button type="button">
-              <CiEdit />
-              Ecrire un avis
-            </button>
-            <button type="button">
-              <CiHeart />
-              Ajouter à mes envies
-            </button>
+            {event?.userRating && <h6>{event.userRating}</h6>}
           </div>
-          <div className={styles["event-localisation__section"]}>
-            <h6 className="line-up">
+          <Rater
+            rating={event.userRating}
+            setLoginModalOpen={setLoginModalOpen}
+          />
+          <button type="button">
+            <CiEdit size={30} />
+            Ecrire un avis
+          </button>
+          <button type="button">
+            <CiHeart size={30} />
+            Ajouter à mes envies
+          </button>
+        </div>
+        <div className={styles.event_localisation__infos}>
+          {/* <div className={styles["event-localisation__section"]}>
+            <h6>
               Du {new Date(event.date_start).toLocaleDateString()} au{" "}
               {new Date(event.date_end).toLocaleDateString()}
             </h6>
@@ -55,12 +58,12 @@ const EventLocalisation: React.FC<EventLocalisationProps> = ({ event }) => {
             <button type="button" className="cta">
               Lien vers l&apos;événement
             </button>
-          </div>
-          <div className={styles["event-localisation__section"]}>
-            <h6 className="line-up">{event.place.address_name}</h6>
+          </div> */}
+          <div className={styles.event_localisation__section}>
+            <h6>{event.place.address_name}</h6>
             {event.contact_facebook && (
               <Link href={event.contact_facebook}>
-                <CiFacebook />
+                <CiFacebook size={30} />
               </Link>
             )}
             <h6>{event.place.address_street}</h6>

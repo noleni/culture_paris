@@ -2,7 +2,7 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import type { Event } from "../../types/eventsTypes";
+import type { Event } from "../../app/types/eventsTypes";
 import Card from "../Card";
 
 import styles from "./eventMap.module.scss";

@@ -1,8 +1,8 @@
 // styles/globals.scss
 
 @use "breaks.scss" as *;
-@import 'slick-carousel/slick/slick.css';
-@import 'slick-carousel/slick/slick-theme.css';
+@import "slick-carousel/slick/slick.css";
+@import "slick-carousel/slick/slick-theme.css";
 
 .theme--light {
   /* Thème clair (par défaut) */
@@ -98,13 +98,28 @@ h1 {
   font-size: 3.5rem;
 }
 
+h4 {
+  font-size: 1.5rem;
+  font-weight: 300;
+  margin: 0.8rem 0;
+
+  &::after {
+    content: "";
+    display: inline-block;
+    width: 250px;
+    height: 2px;
+    background-color: var(--base10);
+    margin: 0 0.5rem;
+  }
+}
+
 h5 {
   font-size: 1rem;
   font-weight: 300;
 }
 
 h6 {
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 400;
   margin: 0.2rem 0;
 
@@ -127,6 +142,16 @@ li {
 }
 
 button {
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  white-space: nowrap;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+
   &.cta {
     background-color: #0095ff;
     border: 1px solid transparent;
@@ -134,7 +159,6 @@ button {
     box-shadow: rgba(255, 255, 255, 0.4) 0 1px 0 0 inset;
     box-sizing: border-box;
     color: #fff;
-    cursor: pointer;
     display: inline-block;
     font-family: -apple-system, system-ui, "Segoe UI", "Liberation Sans",
       sans-serif;
@@ -145,12 +169,6 @@ button {
     padding: 8px 0.8em;
     position: relative;
     text-align: center;
-    text-decoration: none;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-    vertical-align: baseline;
-    white-space: nowrap;
 
     &:hover,
     &:focus {

@@ -1,11 +1,11 @@
 import { getEventById } from "@/lib/events/events";
 import Event from "../../../components/Event/Event";
 
-interface ExpoPageProps {
+interface JeunePublicPageProps {
   params: { id: string };
 }
 
-const ExpoPage = async ({ params }: ExpoPageProps) => {
+const JeunePublicPage = async ({ params }: JeunePublicPageProps) => {
   const { id } = await params;
 
   const event = await getEventById(id);
@@ -14,4 +14,4 @@ const ExpoPage = async ({ params }: ExpoPageProps) => {
   return <Event event={event} />;
 };
 
-export default ExpoPage;
+export default JeunePublicPage;

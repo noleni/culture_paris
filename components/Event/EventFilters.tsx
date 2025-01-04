@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { EventTag } from "../../types/eventsTypes";
+import { EventTag } from "../../app/types/eventsTypes";
 import { HiChevronDoubleLeft } from "react-icons/hi2";
 import { HiChevronDoubleRight } from "react-icons/hi2";
 import CustomAutocomplete from "../UI/Autocomplete";
@@ -25,32 +25,35 @@ const EventFilters: React.FC<{
   const [tagName, setTagName] = useState("");
   const [showFilters, setShowFilters] = useState(true);
 
-const handleChange = (value: string, field: "place" | "zipcode" | "dateStart" | "dateEnd" | "tag") => {
-  const updatedFilters = { place, zipcode, dateStart, dateEnd, tag: "" };
-  updatedFilters[field] = value;
+  const handleChange = (
+    value: string,
+    field: "place" | "zipcode" | "dateStart" | "dateEnd" | "tag"
+  ) => {
+    const updatedFilters = { place, zipcode, dateStart, dateEnd, tag: "" };
+    updatedFilters[field] = value;
 
-  switch (field) {
-    case "place":
-      setPlace(value);
-      break;
-    case "zipcode":
-      setZipcode(value);
-      break;
-    case "dateStart":
-      setDateStart(value);
-      break;
-    case "dateEnd":
-      setDateEnd(value);
-      break;
-    case "tag":
-      setTagName(value);
-      break;
-  }
+    switch (field) {
+      case "place":
+        setPlace(value);
+        break;
+      case "zipcode":
+        setZipcode(value);
+        break;
+      case "dateStart":
+        setDateStart(value);
+        break;
+      case "dateEnd":
+        setDateEnd(value);
+        break;
+      case "tag":
+        setTagName(value);
+        break;
+    }
 
-  filterEvents({
-    ...updatedFilters,
-  });
-};
+    filterEvents({
+      ...updatedFilters,
+    });
+  };
 
   return (
     <div

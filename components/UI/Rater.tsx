@@ -8,7 +8,7 @@ import styles from "./rater.module.scss";
 
 interface RaterProps {
   setLoginModalOpen: (value: boolean) => void;
-  rating: number;
+  rating?: number;
 }
 
 const Rater: React.FC<RaterProps> = (props: RaterProps) => {
@@ -46,7 +46,7 @@ const Rater: React.FC<RaterProps> = (props: RaterProps) => {
             />
             <FaStar
               className="star"
-              size={18}
+              size={20}
               color={
                 ratingValue <= (hover || rating || 0) ? "#ffc107" : "#e4e5e9"
               }

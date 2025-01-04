@@ -1,5 +1,5 @@
 import { getEventById } from "@/lib/events/events";
-import Event from "../../components/Event/Event";
+import Event from "../../../components/Event/Event";
 
 interface TheatrePageProps {
   params: { id: string };

@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { Event, EventTag } from "../../types/eventsTypes";
+import { Event, EventTag } from "../../app/types/eventsTypes";
 import EventFilters from "./EventFilters";
 import EventsList from "./EventsList";
 import EventMap from "./EventMap";

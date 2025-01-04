@@ -4,7 +4,7 @@ import Link from "next/link";
 import { IoMdStarOutline } from "react-icons/io";
 import { IoMdHeartEmpty } from "react-icons/io";
 import styles from "./card.module.scss";
-import type { Event } from "../types/eventsTypes";
+import type { Event } from "../app/types/eventsTypes";
 
 interface CardProps {
   event: Event;
@@ -36,7 +36,9 @@ const Card: React.FC<CardProps> = ({ event, href }) => {
         <h5>{event.title}</h5>
       </div>
       <div className={styles.card__actions}>
-        <span className={styles.card__rating}>{event.average_rating ? event.average_rating : "-"}</span>
+        <span className={styles.card__rating}>
+          {event.average_rating ? event.average_rating : "-"}
+        </span>
         <div className={styles.card__icons}>
           <IoMdStarOutline />
           <IoMdHeartEmpty />
