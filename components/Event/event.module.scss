@@ -113,31 +113,6 @@
           justify-content: space-between;
           align-items: center;
         }
-        button {
-          cursor: pointer;
-          padding: 0.2rem 0;
-          width: fit-content;
-          border: none;
-          background-color: inherit;
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-
-          svg {
-            border: 1px solid var(--primary50);
-            border-radius: 50%;
-            padding: 0.3rem;
-            transition: all 0.3s;
-
-            &:hover {
-              background-color: var(--primary50);
-            }
-
-            &.active {
-              background-color: var(--primary50);
-            }
-          }
-        }
       }
     }
 
